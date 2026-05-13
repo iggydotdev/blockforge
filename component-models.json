@@ -81,6 +81,229 @@
     ]
   },
   {
+    "id": "section",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Section Name",
+        "description": "The label shown for this section in the Content Tree"
+      },
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
+        "options": [
+          {
+            "name": "Highlight",
+            "value": "highlight"
+          },
+          {
+            "name": "Card Collection",
+            "value": "card-collection"
+          },
+          {
+            "name": "Articles Layout (title + button + articles)",
+            "value": "articles-layout"
+          },
+          {
+            "name": "Section Header Row (title + button)",
+            "value": "section-header-row"
+          },
+          {
+            "name": "Stats Layout (title + stats)",
+            "value": "stats-layout"
+          },
+          {
+            "name": "Benefits Layout (deprecated, use Section Header Row)",
+            "value": "benefits-layout"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tag",
+        "label": "Tag",
+        "description": "Short label shown on the image, e.g. \"News\", \"Motoring\".",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "tagVariant",
+        "label": "Tag Style",
+        "value": "tag-yellow",
+        "options": [
+          {
+            "name": "Yellow",
+            "value": "tag-yellow"
+          },
+          {
+            "name": "Teal",
+            "value": "tag-teal"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link",
+        "description": "Where the card and the \"Read\" CTA link to."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text",
+        "value": "Read"
+      }
+    ]
+  },
+  {
+    "id": "banner",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Body Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "CTA Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkTitle",
+        "label": "CTA Title (tooltip)"
+      }
+    ]
+  },
+  {
+    "id": "benefit-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "button",
     "fields": [
       {
@@ -101,7 +324,7 @@
       {
         "component": "select",
         "name": "linkType",
-        "label": "Type",
+        "label": "Variant",
         "options": [
           {
             "name": "default",
@@ -116,28 +339,117 @@
             "value": "secondary"
           }
         ]
+      },
+      {
+        "component": "container",
+        "label": "With Icon",
+        "name": "withIcon",
+        "valueType": "string",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "boolean",
+            "name": "hasLeftIcon",
+            "label": "Icon left",
+            "valueType": "boolean"
+          },
+          {
+            "component": "select",
+            "name": "leftIcon",
+            "label": "Left Icon",
+            "condition": {
+              "===": [
+                {
+                  "var": "hasLeftIcon"
+                },
+                true
+              ]
+            },
+            "options": [
+              {
+                "name": "None",
+                "value": ""
+              },
+              {
+                "name": "shopping cart",
+                "value": "shopping-cart"
+              },
+              {
+                "name": "left arrow",
+                "value": "left-arrow"
+              },
+              {
+                "name": "right arrow",
+                "value": "right-arrow"
+              },
+              {
+                "name": "search",
+                "value": "search"
+              }
+            ]
+          },
+          {
+            "component": "boolean",
+            "name": "hasRightIcon",
+            "label": "Icon right",
+            "value": false
+          },
+          {
+            "component": "select",
+            "name": "rightIcon",
+            "label": "Right icon asset",
+            "value": "",
+            "condition": {
+              "===": [
+                {
+                  "var": "hasRightIcon"
+                },
+                true
+              ]
+            },
+            "options": [
+              {
+                "name": "None",
+                "value": ""
+              },
+              {
+                "name": "shopping cart",
+                "value": "shopping-cart"
+              },
+              {
+                "name": "left arrow",
+                "value": "left-arrow"
+              },
+              {
+                "name": "right arrow",
+                "value": "right-arrow"
+              },
+              {
+                "name": "search",
+                "value": "search"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
   {
-    "id": "section",
+    "id": "icard",
     "fields": [
       {
-        "component": "text",
-        "name": "name",
-        "label": "Section Name",
-        "description": "The label shown for this section in the Content Tree"
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
       },
       {
-        "component": "multiselect",
-        "name": "style",
-        "label": "Style",
-        "options": [
-          {
-            "name": "Highlight",
-            "value": "highlight"
-          }
-        ]
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
@@ -161,6 +473,32 @@
     ]
   },
   {
+    "id": "carousel-slide",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -180,12 +518,289 @@
     ]
   },
   {
+    "id": "content-block",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image (optional)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow (small label above title)",
+        "description": "Short uppercase label, e.g. \"Insurance\".",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title (large heading)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Body Content",
+        "description": "Paragraphs and a bulleted list (rendered with green checkmarks).",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "cta_link",
+        "label": "CTA Link (optional)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cta_linkText",
+        "label": "CTA Text",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "cta_linkType",
+        "label": "CTA Variant",
+        "value": "primary",
+        "options": [
+          {
+            "name": "Primary (yellow)",
+            "value": "primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary"
+          },
+          {
+            "name": "Tertiary",
+            "value": "tertiary"
+          },
+          {
+            "name": "Default link",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Variant",
+        "description": "Layout options for this block.",
+        "value": "",
+        "options": [
+          {
+            "name": "Image on right",
+            "value": "content-block-image-right"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "divider",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Thick",
+            "value": "thick"
+          },
+          {
+            "name": "Dashed",
+            "value": "dashed"
+          },
+          {
+            "name": "Dotted",
+            "value": "dotted"
+          },
+          {
+            "name": "Colored",
+            "value": "colored"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Placeholder Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Embed URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "fcards",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "FEED URL",
+        "description": "The URL of the feed to display"
+      }
+    ]
+  },
+  {
+    "id": "form",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "source",
+        "label": "Form Definition (JSON)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceText",
+        "label": "Source Link Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "submit",
+        "label": "Submit Endpoint"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "submitText",
+        "label": "Submit Link Text",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "gallery-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "caption",
+        "label": "Caption",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-slide",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text-input",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Body Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "ctaPrimary",
+        "label": "Primary CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaPrimaryText",
+        "label": "Primary CTA Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "ctaSecondary",
+        "label": "Secondary CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaSecondaryText",
+        "label": "Secondary CTA Label"
       }
     ]
   },
@@ -212,6 +827,266 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "html",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "rawHtml",
+        "label": "Raw markup",
+        "description": "Use the code type to insert HTML",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "product-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "links",
+        "label": "Links",
+        "description": "A bulleted list of links shown at the bottom of the card.",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "promo-banner",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "badge",
+        "label": "Badge (optional)",
+        "description": "Pill text shown in the top-left of the image, e.g. \"Up to 40% off\"",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content",
+        "description": "Use Heading 3 for the title, then paragraphs for the body copy.",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link",
+        "description": "The whole banner links here"
+      },
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Variant",
+        "description": "Theme and width for this banner.",
+        "value": "",
+        "options": [
+          {
+            "name": "Light theme (cream panel)",
+            "value": "promo-banner-light"
+          },
+          {
+            "name": "Half width (pairs with another half)",
+            "value": "promo-banner-half"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "quote",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "quotation",
+        "label": "Quotation",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "attribution",
+        "label": "Attribution",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "search",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "source",
+        "label": "Index URL",
+        "description": "Defaults to /query-index.json if empty"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sourceText",
+        "label": "Source Link Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "value",
+        "label": "Value",
+        "description": "Large stat number/value shown on top.",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon Alt Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "tab",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content",
+        "label": "Content",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "video",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Placeholder Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Video URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text",
+        "value": ""
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "autoplay",
+        "label": "Autoplay",
+        "value": false
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "muted",
+        "label": "Muted",
+        "value": false
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "loop",
+        "label": "Loop",
+        "value": false
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "controls",
+        "label": "Show Controls",
+        "value": true
       }
     ]
   }

@@ -8,20 +8,146 @@
   {
     "id": "section",
     "components": [
-      "text",
-      "image",
+      "accordion",
+      "accordions",
+      "articles",
+      "banner",
+      "benefits",
       "button",
-      "title",
-      "hero",
+      "carousel",
       "cards",
       "columns",
-      "fragment"
+      "content-block",
+      "divider",
+      "embed",
+      "fcards",
+      "form",
+      "fragment",
+      "gallery",
+      "hero",
+      "hero-carousel",
+      "html",
+      "icard",
+      "image",
+      "product-cards",
+      "promo-banner",
+      "quote",
+      "search",
+      "stats",
+      "table",
+      "tabs",
+      "text",
+      "title",
+      "video"
+    ]
+  },
+  {
+    "id": "richtext",
+    "rte": {
+      "toolbar": {
+        "format": [
+          "bold",
+          "italic"
+        ],
+        "blocks": [
+          "paragraph",
+          "h1",
+          "h2"
+        ],
+        "list": [
+          "bullet_list",
+          "ordered_list"
+        ],
+        "insert": [
+          "link",
+          "unlink",
+          "image",
+          "special_characters"
+        ],
+        "sections": [
+          "format",
+          "blocks",
+          "list",
+          "insert"
+        ]
+      },
+      "actions": {
+        "bold": {
+          "tag": "strong",
+          "shortcut": "Mod-B",
+          "label": "Bold"
+        },
+        "italic": {
+          "tag": "em",
+          "shortcut": "Mod-I"
+        },
+        "bullet_list": {
+          "wrapInParagraphs": true,
+          "label": "Bullet List"
+        },
+        "ordered_list": {
+          "wrapInParagraphs": false
+        },
+        "link": {
+          "hideTarget": false,
+          "shortcut": "Mod-K",
+          "label": "Add Link"
+        },
+        "unlink": {
+          "label": "Remove Link"
+        },
+        "image": {
+          "wrapInPicture": false,
+          "shortcut": "Mod-Shift-I",
+          "label": "Insert Image"
+        },
+        "special_characters": {
+          "label": "Special Characters",
+          "appendCharacters": [
+            {
+              "character": "★",
+              "title": "Black star"
+            }
+          ]
+        },
+        "h1": {
+          "shortcut": "Mod-Alt-1",
+          "label": "Main Heading"
+        }
+      }
+    },
+    "components": [
+      "richtext"
+    ]
+  },
+  {
+    "id": "accordions",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
+    "id": "articles",
+    "components": [
+      "article-card"
+    ]
+  },
+  {
+    "id": "benefits",
+    "components": [
+      "benefit-item"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-slide"
     ]
   },
   {
@@ -37,6 +163,36 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "gallery",
+    "components": [
+      "gallery-item"
+    ]
+  },
+  {
+    "id": "hero-carousel",
+    "components": [
+      "hero-slide"
+    ]
+  },
+  {
+    "id": "product-cards",
+    "components": [
+      "product-card"
+    ]
+  },
+  {
+    "id": "stats",
+    "components": [
+      "stat-item"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "tab"
     ]
   }
 ]
