@@ -1,0 +1,142 @@
+/* Product Cards — grid of cards with icon, title, body, and a list of links.
+   Pair with the "Section Header Row" section style to put a heading + button
+   above the grid. All visual values come from styles/variables.css. */
+
+.product-cards {
+  --product-card-bg: var(--color-neutral-white);
+  --product-card-radius: var(--radius-24);
+  --product-card-padding: var(--spacing-32);
+  --product-card-gap: var(--spacing-24);
+  --product-card-divider: var(--color-neutral-100);
+  --product-card-link-fg: var(--color-brand-primary-base-500);
+
+  display: block;
+}
+
+.product-cards .product-cards-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--product-card-gap);
+}
+
+.product-cards .product-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding: var(--product-card-padding);
+  background: var(--product-card-bg);
+  border-radius: var(--product-card-radius);
+  box-shadow: 0 var(--spacing-2) var(--spacing-8) var(--color-shades-black-100);
+}
+
+/* Icon */
+.product-cards .product-card-icon {
+  display: flex;
+  align-items: center;
+  height: var(--size-48);
+}
+
+.product-cards .product-card-icon picture,
+.product-cards .product-card-icon img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: var(--size-64);
+  object-fit: contain;
+}
+
+/* Title */
+.product-cards .product-card-title {
+  margin: 0;
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-24);
+  line-height: var(--typography-line-height-32);
+  font-weight: var(--typography-weight-bold);
+  color: var(--color-neutral-900);
+}
+
+/* Body text */
+.product-cards .product-card-text {
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-16);
+  line-height: var(--typography-line-height-24);
+  color: var(--color-neutral-600);
+  flex: 1 0 auto;
+}
+
+.product-cards .product-card-text > * {
+  margin: 0;
+}
+
+.product-cards .product-card-text > * + * {
+  margin-top: var(--typography-paragraph-spacing-8);
+}
+
+/* Links list */
+.product-cards .product-card-links {
+  margin-top: var(--spacing-16);
+  border-top: var(--border-1) solid var(--product-card-divider);
+}
+
+.product-cards .product-card-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-cards .product-card-links li {
+  margin: 0;
+  border-bottom: var(--border-1) solid var(--product-card-divider);
+}
+
+.product-cards .product-card-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16) 0;
+  color: var(--product-card-link-fg);
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-16);
+  line-height: var(--typography-line-height-24);
+  font-weight: var(--typography-weight-semibold);
+  text-decoration: none;
+}
+
+.product-cards .product-card-links a::after {
+  content: '\2192';
+  font-weight: var(--typography-weight-regular);
+  flex: 0 0 auto;
+  transition: transform var(--motion-duration-200) var(--motion-easing-standard);
+}
+
+.product-cards .product-card-links a:hover,
+.product-cards .product-card-links a:focus-visible {
+  text-decoration: underline;
+}
+
+.product-cards .product-card-links a:hover::after,
+.product-cards .product-card-links a:focus-visible::after {
+  transform: translateX(var(--spacing-4));
+}
+
+@media (width >= 600px) {
+  .product-cards .product-cards-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .product-cards .product-cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-32);
+  }
+
+  .product-cards .product-card-title {
+    font-size: var(--typography-size-28);
+    line-height: var(--typography-line-height-36);
+  }
+}

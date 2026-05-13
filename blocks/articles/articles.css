@@ -1,0 +1,141 @@
+/* Articles — grid of article cards with image, tag, title, and a "Read" link.
+   Pair with the "Section Header Row" section style to put a heading + button
+   above the grid. All visual values come from styles/variables.css. */
+
+.articles {
+  --article-card-radius: var(--radius-24);
+  --article-card-gap: var(--spacing-24);
+  --article-card-divider: var(--color-neutral-200);
+  --article-card-link-fg: var(--color-brand-primary-base-500);
+  --article-card-title-fg: var(--color-neutral-900);
+
+  display: block;
+}
+
+.articles .articles-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--article-card-gap);
+}
+
+.articles .article-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  margin: 0;
+}
+
+/* Media (image + tag overlay) */
+.articles .article-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  border-radius: var(--article-card-radius);
+  overflow: hidden;
+}
+
+.articles .article-card-media picture,
+.articles .article-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tag overlay */
+.articles .article-card-tag {
+  position: absolute;
+  top: var(--spacing-12);
+  left: var(--spacing-12);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-12);
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-10);
+  line-height: var(--typography-line-height-10, 1);
+  font-weight: var(--typography-weight-medium);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-brand-primary-base-500);
+}
+
+.articles .article-card-tag.tag-yellow {
+  background: var(--color-brand-secondary-base-500);
+}
+
+.articles .article-card-tag.tag-teal {
+  background: #94e5c2;
+}
+
+/* Title */
+.articles .article-card-title {
+  margin: 0;
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-18);
+  line-height: var(--typography-line-height-24);
+  font-weight: var(--typography-weight-regular);
+  color: var(--article-card-title-fg);
+  flex: 1 0 auto;
+}
+
+/* Read link */
+.articles .article-card-link {
+  margin-top: var(--spacing-16);
+}
+
+.articles .article-card-read {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  color: var(--article-card-link-fg);
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-18);
+  line-height: var(--typography-line-height-24);
+  font-weight: var(--typography-weight-regular);
+  text-decoration: none;
+}
+
+.articles .article-card-read::before {
+  content: '\2192';
+  flex: 0 0 auto;
+  transition: transform var(--motion-duration-200) var(--motion-easing-standard);
+}
+
+.articles .article-card-read:hover,
+.articles .article-card-read:focus-visible {
+  text-decoration: underline;
+}
+
+.articles .article-card-read:hover::before,
+.articles .article-card-read:focus-visible::before {
+  transform: translateX(var(--spacing-4));
+}
+
+/* Tablet+: two columns with thin vertical dividers between cards */
+@media (width >= 600px) {
+  .articles .articles-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-32);
+  }
+
+  .articles .article-card + .article-card {
+    padding-left: var(--spacing-32);
+    border-left: var(--border-1) solid var(--article-card-divider);
+  }
+}
+
+/* Desktop: three columns with dividers between every card */
+@media (width >= 900px) {
+  .articles .articles-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .articles .article-card:nth-child(2) {
+    padding-left: var(--spacing-32);
+    border-left: var(--border-1) solid var(--article-card-divider);
+  }
+}

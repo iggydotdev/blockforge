@@ -1,0 +1,95 @@
+/* Benefits block — row of clickable image tiles. Title + CTA are placed
+   above the block as separate Title and Button components in the same section. */
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.benefits .benefits-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.benefits .benefits-list > li {
+  margin: 0;
+  padding: 0;
+}
+
+.benefits .benefits-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-brand-primary-base-500, #00247a);
+  border-radius: 16px;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+  transition: outline-color 0.15s ease;
+}
+
+.benefits .benefits-tile:hover,
+.benefits .benefits-tile:focus-visible {
+  outline-color: var(--color-brand-primary-base-500, #00247a);
+}
+
+.benefits .benefits-tile-image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--color-brand-primary-base-50, #f2f4f8);
+}
+
+.benefits .benefits-tile-image picture,
+.benefits .benefits-tile-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.benefits .benefits-tile-label {
+  font-size: var(--typography-size-16, 16px);
+  line-height: var(--typography-line-height-22, 22px);
+  font-weight: var(--typography-weight-medium, 500);
+}
+
+a.benefits-tile:hover .benefits-tile-label,
+a.benefits-tile:focus-visible .benefits-tile-label {
+  text-decoration: underline;
+}
+
+/* Hovered/focused tile shows arrow before label, matching the design */
+a.benefits-tile:hover .benefits-tile-label::before,
+a.benefits-tile:focus-visible .benefits-tile-label::before {
+  content: '→ ';
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+@media (width >= 600px) {
+  .benefits .benefits-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (width >= 900px) {
+  .benefits .benefits-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 1200px) {
+  .benefits .benefits-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+  }
+}

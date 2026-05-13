@@ -12,6 +12,10 @@
     "build:json:models": "merge-json-cli -i \"models/_component-models.json\" -o \"component-models.json\"",
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
+    "build:tokens:primitives": "node tools/build-tokens.mjs",
+    "build:tokens:semantic": "node tools/build-tokens.mjs docs/RACQ.semantics.json styles/semantic.css --prefix=semantic --reference=docs/RACQ.primitives.json",
+    "build:tokens:inject": "node tools/inject-tokens.mjs",
+    "build:tokens": "npm-run-all build:tokens:primitives build:tokens:semantic build:tokens:inject",
     "prepare": "husky"
   },
   "repository": {

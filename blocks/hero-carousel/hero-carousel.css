@@ -1,0 +1,360 @@
+/* Hero Carousel — full-bleed banner carousel with auto-advancing slides.
+
+   Each slide mirrors the standalone Banner block visual treatment:
+   navy text panel (left) + clipped image with concave left edge (right) + yellow accent.
+
+   Layout:
+     Mobile  — stacked (text above image)
+     ≥ 900px — side-by-side, image gets a concave left-edge clip-path
+
+   All visual values come from styles/variables.css.
+*/
+
+/* Full-bleed: lift the section wrapper's max-width/padding constraints. */
+.hero-carousel-container .hero-carousel-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-carousel {
+  position: relative;
+  background-color: var(--color-brand-primary-base-500);
+  overflow: hidden;
+}
+
+/* ── Slides container ────────────────────────────────────────────────────── */
+
+.hero-carousel-slides {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.hero-carousel-slide {
+  display: none;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-carousel-slide.is-active {
+  display: flex;
+}
+
+/* ── Text panel ──────────────────────────────────────────────────────────── */
+
+.hero-carousel-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  padding: var(--spacing-48) var(--spacing-24);
+  justify-content: center;
+}
+
+.hero-carousel-heading {
+  margin: 0;
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-28);
+  font-weight: var(--typography-weight-regular);
+  line-height: var(--typography-line-height-36);
+  letter-spacing: -0.03em;
+  color: var(--color-neutral-white);
+}
+
+.hero-carousel-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.hero-carousel-body p {
+  margin: 0;
+  font-family: var(--typography-family-secondary);
+  font-size: var(--typography-size-18);
+  line-height: var(--typography-line-height-28);
+  letter-spacing: -0.01em;
+  color: rgb(255 255 255 / 85%);
+}
+
+.hero-carousel-body a {
+  color: var(--color-neutral-white);
+  text-decoration: underline;
+}
+
+/* ── CTAs ────────────────────────────────────────────────────────────────── */
+
+.hero-carousel-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-16);
+}
+
+.hero-carousel-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px var(--spacing-32);
+  border-radius: var(--radius-full);
+  font-family: var(--typography-family-secondary);
+  font-size: var(--typography-size-16);
+  font-weight: var(--typography-weight-semibold);
+  line-height: var(--typography-line-height-24);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-carousel-cta-primary {
+  background-color: var(--color-brand-secondary-base-500);
+  color: var(--color-brand-primary-base-500);
+  border: 1px solid var(--color-brand-secondary-base-500);
+}
+
+.hero-carousel-cta-primary:hover,
+.hero-carousel-cta-primary:focus-visible {
+  background-color: var(--color-brand-secondary-base-600, #d6c01a);
+  outline: none;
+}
+
+.hero-carousel-cta-secondary {
+  background-color: transparent;
+  color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-white);
+}
+
+.hero-carousel-cta-secondary:hover,
+.hero-carousel-cta-secondary:focus-visible {
+  background-color: rgb(255 255 255 / 12%);
+  outline: none;
+}
+
+/* ── Image panel ─────────────────────────────────────────────────────────── */
+
+.hero-carousel-media-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.hero-carousel-media {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-carousel-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-carousel-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Indicators / pagination ─────────────────────────────────────────────── */
+
+.hero-carousel-indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16) var(--spacing-24);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-carousel-indicators ol {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+}
+
+.hero-carousel-indicator button {
+  background: transparent;
+  border: 0;
+  padding: 4px 2px;
+  font-family: var(--typography-family-secondary);
+  font-size: var(--typography-size-14);
+  font-weight: var(--typography-weight-semibold);
+  letter-spacing: 0.05em;
+  color: rgb(255 255 255 / 50%);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hero-carousel-indicator button.is-active,
+.hero-carousel-indicator button:hover,
+.hero-carousel-indicator button:focus-visible {
+  color: var(--color-neutral-white);
+  outline: none;
+}
+
+/* Progress bar (animates while a slide is active) */
+.hero-carousel-progress {
+  flex: 1 1 auto;
+  height: 2px;
+  background: rgb(255 255 255 / 25%);
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 80px;
+}
+
+.hero-carousel-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--color-neutral-white);
+  transform-origin: left center;
+  animation: hero-carousel-progress 6s linear forwards;
+}
+
+.hero-carousel.is-paused .hero-carousel-progress-fill {
+  animation-play-state: paused;
+}
+
+@keyframes hero-carousel-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Play / pause toggle */
+.hero-carousel-playpause {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 50%);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-carousel-playpause:hover,
+.hero-carousel-playpause:focus-visible {
+  border-color: var(--color-neutral-white);
+  outline: none;
+}
+
+/* Pause glyph (two bars) when playing */
+.hero-carousel-playpause[data-state='playing']::before,
+.hero-carousel-playpause[data-state='playing']::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 10px;
+  background: var(--color-neutral-white);
+  transform: translateY(-50%);
+}
+
+.hero-carousel-playpause[data-state='playing']::before {
+  left: calc(50% - 4px);
+}
+
+.hero-carousel-playpause[data-state='playing']::after {
+  left: calc(50% + 2px);
+}
+
+/* Play glyph (triangle) when paused */
+.hero-carousel-playpause[data-state='paused']::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent var(--color-neutral-white);
+  transform: translate(-40%, -50%);
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+
+@media (width >= 600px) {
+  .hero-carousel-heading {
+    font-size: var(--typography-size-32);
+    line-height: var(--typography-line-height-40);
+  }
+
+  .hero-carousel-content {
+    padding: var(--spacing-48) var(--spacing-32);
+  }
+
+  .hero-carousel-indicators {
+    padding: var(--spacing-16) var(--spacing-32);
+  }
+}
+
+/* ── Desktop ─────────────────────────────────────────────────────────────── */
+
+@media (width >= 900px) {
+  .hero-carousel-slide {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 500px;
+  }
+
+  .hero-carousel-content {
+    flex: 0 0 50%;
+    padding: var(--spacing-80) var(--spacing-64);
+  }
+
+  .hero-carousel-heading {
+    font-size: var(--typography-size-48, 48px);
+    line-height: var(--typography-line-height-56, 56px);
+  }
+
+  /* Image panel: fills remaining space; clip-path creates concave left edge */
+  .hero-carousel-media-wrap {
+    flex: 1 1 0;
+    aspect-ratio: unset;
+    overflow: visible;
+  }
+
+  .hero-carousel-media {
+    clip-path: url('#hero-carousel-image-clip');
+  }
+
+  /* RACQ yellow brand accent — ellipse peeking at the bottom-right corner */
+  .hero-carousel-media-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 48px;
+    width: 140px;
+    height: 68px;
+    background: var(--color-brand-secondary-base-500);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .hero-carousel-indicators {
+    position: absolute;
+    bottom: var(--spacing-24);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 3;
+    padding: 0 var(--spacing-64);
+  }
+
+  .hero-carousel-progress {
+    max-width: 120px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-carousel-content {
+    padding: var(--spacing-128) var(--spacing-64) var(--spacing-128) var(--spacing-96);
+  }
+}

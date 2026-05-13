@@ -1,0 +1,327 @@
+/*
+ * AUTO-GENERATED FROM docs/RACQ.semantics.json
+ * Do not edit by hand. Run the build script to regenerate.
+ */
+
+:root {
+  /* default */
+  --semantic-default: #00247a;
+
+  /* hover */
+  --semantic-hover: #001f68;
+
+  /* pressed */
+  --semantic-pressed: #001955;
+
+  /* focus */
+  --semantic-focus: #001955;
+
+  /* disabled */
+  --semantic-disabled: #697482;
+
+  /* typography */
+  --semantic-typography-body-lead-text-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-lead-text-font-size: var(--typography-size-20);
+  --semantic-typography-body-lead-text-font-weight: var(--typography-weight-regular);
+  --semantic-typography-body-lead-text-line-height: var(--typography-size-28);
+  --semantic-typography-body-lead-text-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-body-lead-text-paragraph-spacing: var(--typography-size-20);
+  --semantic-typography-body-lg-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-lg-font-size: var(--typography-size-22);
+  --semantic-typography-body-lg-font-weight: var(--typography-weight-regular);
+  --semantic-typography-body-lg-line-height: var(--typography-size-32);
+  --semantic-typography-body-lg-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-body-lg-paragraph-spacing: var(--typography-size-20);
+  --semantic-typography-body-lg-list-spacing: var(--typography-paragraph-spacing-8);
+  --semantic-typography-body-lg-heavy-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-lg-heavy-font-size: var(--typography-size-22);
+  --semantic-typography-body-lg-heavy-font-weight: var(--typography-weight-semibold);
+  --semantic-typography-body-lg-heavy-line-height: var(--typography-size-32);
+  --semantic-typography-body-lg-heavy-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-body-lg-heavy-paragraph-spacing: var(--typography-size-20);
+  --semantic-typography-body-lg-heavy-list-spacing: var(--typography-paragraph-spacing-8);
+  --semantic-typography-body-md-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-md-font-size: var(--typography-size-18);
+  --semantic-typography-body-md-font-weight: var(--typography-weight-regular);
+  --semantic-typography-body-md-line-height: var(--typography-size-24);
+  --semantic-typography-body-md-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-body-md-paragraph-spacing: var(--typography-size-18);
+  --semantic-typography-body-md-list-spacing: var(--typography-paragraph-spacing-8);
+  --semantic-typography-body-md-heavy-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-md-heavy-font-size: var(--typography-size-18);
+  --semantic-typography-body-md-heavy-font-weight: var(--typography-weight-semibold);
+  --semantic-typography-body-md-heavy-line-height: var(--typography-size-24);
+  --semantic-typography-body-md-heavy-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-body-md-heavy-paragraph-spacing: var(--typography-size-18);
+  --semantic-typography-body-md-heavy-list-spacing: var(--typography-paragraph-spacing-8);
+  --semantic-typography-body-sm-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-sm-font-size: var(--typography-size-16);
+  --semantic-typography-body-sm-font-weight: var(--typography-weight-regular);
+  --semantic-typography-body-sm-line-height: var(--typography-size-24);
+  --semantic-typography-body-sm-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-body-sm-paragraph-spacing: var(--typography-size-16);
+  --semantic-typography-body-sm-list-spacing: var(--typography-list-spacing-6);
+  --semantic-typography-body-sm-heavy-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-sm-heavy-font-size: var(--typography-size-16);
+  --semantic-typography-body-sm-heavy-font-weight: var(--typography-weight-semibold);
+  --semantic-typography-body-sm-heavy-line-height: var(--typography-size-24);
+  --semantic-typography-body-sm-heavy-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-body-sm-heavy-paragraph-spacing: var(--typography-size-16);
+  --semantic-typography-body-sm-heavy-list-spacing: var(--typography-list-spacing-6);
+  --semantic-typography-body-xs-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-xs-font-size: var(--typography-size-14);
+  --semantic-typography-body-xs-font-weight: var(--typography-weight-regular);
+  --semantic-typography-body-xs-line-height: var(--typography-size-20);
+  --semantic-typography-body-xs-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-body-xs-paragraph-spacing: var(--typography-size-14);
+  --semantic-typography-body-xs-list-spacing: var(--typography-list-spacing-4);
+  --semantic-typography-body-xs-heavy-font-family: var(--typography-family-secondary);
+  --semantic-typography-body-xs-heavy-font-size: var(--typography-size-14);
+  --semantic-typography-body-xs-heavy-font-weight: var(--typography-weight-semibold);
+  --semantic-typography-body-xs-heavy-line-height: var(--typography-size-20);
+  --semantic-typography-body-xs-heavy-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-body-xs-heavy-paragraph-spacing: var(--typography-size-14);
+  --semantic-typography-body-xs-heavy-list-spacing: var(--typography-list-spacing-4);
+  --semantic-typography-heading-h1-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-h1-font-size: var(--typography-size-64);
+  --semantic-typography-heading-h1-font-weight: var(--typography-weight-medium);
+  --semantic-typography-heading-h1-line-height: var(--typography-size-68);
+  --semantic-typography-heading-h1-letter-spacing: var(--typography-letter-spacing-minus-2);
+  --semantic-typography-heading-h1-stats-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-h1-stats-font-size: var(--typography-size-64);
+  --semantic-typography-heading-h1-stats-font-weight: var(--typography-weight-light);
+  --semantic-typography-heading-h1-stats-line-height: var(--typography-size-64);
+  --semantic-typography-heading-h1-stats-letter-spacing: var(--typography-letter-spacing-minus-2);
+  --semantic-typography-heading-h2-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-h2-font-size: var(--typography-size-32);
+  --semantic-typography-heading-h2-font-weight: var(--typography-weight-medium);
+  --semantic-typography-heading-h2-line-height: var(--typography-size-40);
+  --semantic-typography-heading-h2-letter-spacing: var(--typography-letter-spacing-minus-2);
+  --semantic-typography-heading-h2-emphasised-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-h2-emphasised-font-size: var(--typography-size-32);
+  --semantic-typography-heading-h2-emphasised-font-weight: var(--typography-weight-regular);
+  --semantic-typography-heading-h2-emphasised-line-height: var(--typography-size-40);
+  --semantic-typography-heading-h2-emphasised-letter-spacing: var(--typography-letter-spacing-minus-3);
+  --semantic-typography-heading-h3-font-family: var(--typography-family-secondary);
+  --semantic-typography-heading-h3-font-size: var(--typography-size-22);
+  --semantic-typography-heading-h3-font-weight: var(--typography-weight-semibold);
+  --semantic-typography-heading-h3-line-height: var(--typography-size-28);
+  --semantic-typography-heading-h3-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-heading-h4-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-h4-font-size: var(--typography-size-18);
+  --semantic-typography-heading-h4-font-weight: var(--typography-weight-regular);
+  --semantic-typography-heading-h4-line-height: var(--typography-size-24);
+  --semantic-typography-heading-h4-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-heading-subheading-font-family: var(--typography-family-primary);
+  --semantic-typography-heading-subheading-font-size: var(--typography-size-12);
+  --semantic-typography-heading-subheading-font-weight: var(--typography-weight-medium);
+  --semantic-typography-heading-subheading-line-height: var(--typography-size-12);
+  --semantic-typography-heading-subheading-letter-spacing: var(--typography-letter-spacing-5);
+  --semantic-typography-action-primary-lg-font-family: var(--typography-family-primary);
+  --semantic-typography-action-primary-lg-font-size: var(--typography-size-18);
+  --semantic-typography-action-primary-lg-font-weight: var(--typography-weight-medium);
+  --semantic-typography-action-primary-lg-line-height: var(--typography-size-18);
+  --semantic-typography-action-primary-lg-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-action-primary-sm-font-family: var(--typography-family-primary);
+  --semantic-typography-action-primary-sm-font-size: var(--typography-size-16);
+  --semantic-typography-action-primary-sm-font-weight: var(--typography-weight-medium);
+  --semantic-typography-action-primary-sm-line-height: var(--typography-size-16);
+  --semantic-typography-action-primary-sm-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-action-inline-lg-font-family: var(--typography-family-primary);
+  --semantic-typography-action-inline-lg-font-size: var(--typography-size-18);
+  --semantic-typography-action-inline-lg-font-weight: var(--typography-weight-regular);
+  --semantic-typography-action-inline-lg-line-height: var(--typography-size-18);
+  --semantic-typography-action-inline-lg-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-action-inline-sm-font-family: var(--typography-family-primary);
+  --semantic-typography-action-inline-sm-font-size: var(--typography-size-16);
+  --semantic-typography-action-inline-sm-font-weight: var(--typography-weight-regular);
+  --semantic-typography-action-inline-sm-line-height: var(--typography-size-16);
+  --semantic-typography-action-inline-sm-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-action-nav-menu-font-family: var(--typography-family-primary);
+  --semantic-typography-action-nav-menu-font-size: var(--typography-size-16);
+  --semantic-typography-action-nav-menu-font-weight: var(--typography-weight-regular);
+  --semantic-typography-action-nav-menu-line-height: var(--typography-size-16);
+  --semantic-typography-action-nav-menu-letter-spacing: var(--typography-letter-spacing-0);
+  --semantic-typography-action-nav-breadcrumbs-font-family: var(--typography-family-secondary);
+  --semantic-typography-action-nav-breadcrumbs-font-size: var(--typography-size-14);
+  --semantic-typography-action-nav-breadcrumbs-font-weight: var(--typography-weight-medium);
+  --semantic-typography-action-nav-breadcrumbs-line-height: var(--typography-size-14);
+  --semantic-typography-action-nav-breadcrumbs-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-action-nav-tabs-default-font-family: var(--typography-family-secondary);
+  --semantic-typography-action-nav-tabs-default-font-size: var(--typography-size-16);
+  --semantic-typography-action-nav-tabs-default-font-weight: var(--typography-weight-regular);
+  --semantic-typography-action-nav-tabs-default-line-height: var(--typography-size-16);
+  --semantic-typography-action-nav-tabs-default-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-action-nav-tabs-active-font-family: var(--typography-family-secondary);
+  --semantic-typography-action-nav-tabs-active-font-size: var(--typography-size-16);
+  --semantic-typography-action-nav-tabs-active-font-weight: var(--typography-weight-medium);
+  --semantic-typography-action-nav-tabs-active-line-height: var(--typography-size-16);
+  --semantic-typography-action-nav-tabs-active-letter-spacing: var(--typography-letter-spacing-minus-1);
+  --semantic-typography-badge-lg-font-family: var(--typography-family-primary);
+  --semantic-typography-badge-lg-font-size: var(--typography-size-14);
+  --semantic-typography-badge-lg-font-weight: var(--typography-weight-regular);
+  --semantic-typography-badge-lg-line-height: var(--typography-size-14);
+  --semantic-typography-badge-lg-letter-spacing: var(--typography-letter-spacing-2);
+  --semantic-typography-badge-md-font-family: var(--typography-family-primary);
+  --semantic-typography-badge-md-font-size: var(--typography-size-12);
+  --semantic-typography-badge-md-font-weight: var(--typography-weight-medium);
+  --semantic-typography-badge-md-line-height: var(--typography-size-12);
+  --semantic-typography-badge-md-letter-spacing: var(--typography-letter-spacing-2);
+
+  /* color */
+  --semantic-color-text-read-only-brand: var(--color-brand-primary-accent-500);
+  --semantic-color-text-read-only-primary: var(--color-neutral-900);
+  --semantic-color-text-read-only-secondary: var(--color-neutral-700);
+  --semantic-color-text-read-only-tertiary: var(--color-neutral-500);
+  --semantic-color-text-read-only-disabled: var(--color-neutral-700);
+  --semantic-color-text-read-only-inverse: var(--color-neutral-white);
+  --semantic-color-text-on-action-default-default: var(--color-brand-primary-base-500);
+  --semantic-color-text-on-action-default-hover: var(--color-brand-primary-base-600);
+  --semantic-color-text-on-action-default-pressed: var(--color-brand-primary-base-650);
+  --semantic-color-text-on-action-default-focus: var(--color-brand-primary-base-650);
+  --semantic-color-text-on-action-default-disabled: var(--color-neutral-400);
+  --semantic-color-text-on-action-inverse-default: var(--color-neutral-white);
+  --semantic-color-text-on-action-inverse-hover: var(--color-neutral-100);
+  --semantic-color-text-on-action-inverse-pressed: var(--color-neutral-200);
+  --semantic-color-text-on-action-inverse-focus: var(--color-neutral-200);
+  --semantic-color-text-on-action-inverse-disabled: var(--color-shades-white-400);
+  --semantic-color-surface-page: var(--color-neutral-white);
+  --semantic-color-surface-subtle: var(--color-brand-secondary-accent-50);
+  --semantic-color-surface-default: var(--color-neutral-white);
+  --semantic-color-surface-raised: var(--color-brand-secondary-accent-100);
+  --semantic-color-surface-overlay: var(--color-neutral-white);
+  --semantic-color-surface-inverse: var(--color-brand-primary-base-500);
+  --semantic-color-border-line-default: var(--color-neutral-200);
+  --semantic-color-border-line-subtle: var(--color-neutral-100);
+  --semantic-color-border-line-strong: var(--color-neutral-300);
+  --semantic-color-border-line-inverse: var(--color-neutral-200);
+  --semantic-color-border-line-focus: var(--color-brand-secondary-accent-100);
+  --semantic-color-border-action-default: var(--color-brand-primary-base-500);
+  --semantic-color-border-action-hover: var(--color-brand-primary-base-600);
+  --semantic-color-border-action-pressed: var(--color-brand-primary-base-650);
+  --semantic-color-border-action-focus: var(--color-brand-primary-base-650);
+  --semantic-color-border-action-disabled: var(--color-neutral-300);
+  --semantic-color-border-action-inverse: var(--color-neutral-white);
+  --semantic-color-border-action-inverse-default: var(--color-brand-primary-base-50);
+  --semantic-color-border-action-inverse-hover: var(--color-shades-white-700);
+  --semantic-color-border-action-inverse-pressed: var(--color-shades-white-500);
+  --semantic-color-border-action-inverse-focus: var(--color-shades-white-200);
+  --semantic-color-border-action-inverse-disabled: var(--color-shades-white-200);
+  --semantic-color-action-primary-default: var(--color-brand-primary-base-500);
+  --semantic-color-action-primary-hover: var(--color-brand-primary-base-450);
+  --semantic-color-action-primary-active: var(--color-brand-primary-base-600);
+  --semantic-color-action-primary-disabled: var(--color-neutral-100);
+  --semantic-color-action-secondary-default: var(--color-brand-secondary-base-500);
+  --semantic-color-action-secondary-hover: var(--color-brand-secondary-base-400);
+  --semantic-color-action-secondary-active: var(--color-brand-secondary-base-600);
+  --semantic-color-action-secondary-disabled: var(--color-neutral-100);
+  --semantic-color-action-tertiary-default: var(--color-neutral-100);
+  --semantic-color-action-tertiary-hover: var(--color-neutral-200);
+  --semantic-color-action-tertiary-pressed: var(--color-neutral-500);
+  --semantic-color-action-tertiary-disabled: var(--color-neutral-100);
+  --semantic-color-action-inverse-default: var(--color-neutral-white);
+  --semantic-color-action-inverse-hover: var(--color-shades-white-800);
+  --semantic-color-action-inverse-active: var(--color-shades-white-700);
+  --semantic-color-action-inverse-disabled: var(--color-neutral-200);
+  --semantic-color-icon-primary: var(--color-brand-primary-base-500);
+  --semantic-color-icon-secondary: var(--color-brand-secondary-base-500);
+  --semantic-color-icon-tertiary: var(--color-neutral-300);
+  --semantic-color-icon-disabled: var(--color-neutral-200);
+  --semantic-color-icon-inverse: var(--color-neutral-white);
+  --semantic-color-icon-on-action-default-default: var(--color-brand-primary-base-500);
+  --semantic-color-icon-on-action-default-hover: var(--color-brand-primary-base-600);
+  --semantic-color-icon-on-action-default-pressed: var(--color-brand-primary-base-650);
+  --semantic-color-icon-on-action-default-focus: var(--color-brand-primary-base-650);
+  --semantic-color-icon-on-action-default-disabled: var(--color-neutral-400);
+  --semantic-color-icon-on-action-inverse-default: var(--color-neutral-white);
+  --semantic-color-icon-on-action-inverse-hover: var(--color-shades-white-800);
+  --semantic-color-icon-on-action-inverse-pressed: var(--color-shades-white-700);
+  --semantic-color-icon-on-action-inverse-focus: var(--color-shades-white-700);
+  --semantic-color-icon-on-action-inverse-disabled: var(--color-shades-white-400);
+  --semantic-color-feedback-success-default: var(--color-status-success-500);
+  --semantic-color-feedback-success-border: var(--color-status-success-300);
+  --semantic-color-feedback-success-subtle: var(--color-status-success-100);
+  --semantic-color-feedback-success-emphasis: var(--color-status-success-700);
+  --semantic-color-feedback-error-default: var(--color-status-danger-500);
+  --semantic-color-feedback-error-border: var(--color-status-danger-300);
+  --semantic-color-feedback-error-subtle: var(--color-status-danger-100);
+  --semantic-color-feedback-error-emphasis: var(--color-status-danger-700);
+  --semantic-color-feedback-warning-default: var(--color-status-warning-500);
+  --semantic-color-feedback-warning-border: var(--color-status-warning-300);
+  --semantic-color-feedback-warning-subtle: var(--color-status-warning-100);
+  --semantic-color-feedback-warning-emphasis: var(--color-status-warning-700);
+  --semantic-color-feedback-info-default: var(--color-status-info-500);
+  --semantic-color-feedback-info-border: var(--color-status-info-300);
+  --semantic-color-feedback-info-subtle: var(--color-status-info-100);
+  --semantic-color-feedback-info-emphasis: var(--color-status-info-700);
+  --semantic-color-focus-ring: var(--color-neutral-black);
+  --semantic-color-focus-background: var(--color-neutral-black);
+  --semantic-color-focus-text: var(--color-neutral-black);
+  --semantic-color-membership-badge-access: var(--color-member-teal);
+  --semantic-color-membership-badge-blue: var(--color-member-blue);
+  --semantic-color-membership-badge-bronze: var(--color-member-bronze);
+  --semantic-color-membership-badge-silver: var(--color-member-silver);
+  --semantic-color-membership-badge-gold: var(--color-member-gold);
+  --semantic-color-membership-badge-gold50: var(--color-member-gold50);
+
+  /* icon */
+  --semantic-icon-stroke-thin: 1;
+  --semantic-icon-stroke-regular: 1.5;
+  --semantic-icon-size-xs: 12;
+  --semantic-icon-size-sm: 16;
+  --semantic-icon-size-m: 24;
+  --semantic-icon-size-lg: 48;
+
+  /* spacing */
+  --semantic-spacing-inline-xxs: var(--spacing-4);
+  --semantic-spacing-inline-xs: var(--spacing-8);
+  --semantic-spacing-inline-sm: var(--spacing-16);
+  --semantic-spacing-inline-md: var(--spacing-24);
+  --semantic-spacing-inline-lg: var(--spacing-32);
+  --semantic-spacing-stack-xs: var(--spacing-20);
+  --semantic-spacing-stack-sm: var(--spacing-40);
+  --semantic-spacing-stack-md: var(--spacing-60);
+  --semantic-spacing-stack-lg: var(--spacing-120);
+  --semantic-spacing-inset-action-horizontal-none: var(--spacing-0);
+  --semantic-spacing-inset-action-horizontal-default: var(--spacing-40);
+  --semantic-spacing-inset-action-horizontal-small: var(--spacing-20);
+  --semantic-spacing-inset-action-horizontal-extra-small: var(--spacing-16);
+  --semantic-spacing-inset-action-vertical-none: var(--spacing-0);
+  --semantic-spacing-inset-action-vertical-medium: var(--spacing-28);
+  --semantic-spacing-inset-action-vertical-default: var(--spacing-20);
+  --semantic-spacing-inset-action-vertical-small: var(--spacing-12);
+  --semantic-spacing-inset-action-vertical-extra-small: var(--spacing-8);
+
+  /* radius */
+  --semantic-radius-none: var(--radius-0);
+  --semantic-radius-sm: var(--radius-8);
+  --semantic-radius-md: var(--radius-24);
+  --semantic-radius-lg: var(--radius-48);
+  --semantic-radius-full: var(--radius-full);
+
+  /* border */
+  --semantic-border-1: var(--border-1);
+  --semantic-border-2: var(--border-2);
+  --semantic-border-4: var(--border-4);
+
+  /* elevation */
+  --semantic-elevation-none: var(--elevation-0);
+  --semantic-elevation-sm: var(--elevation-1);
+  --semantic-elevation-md: var(--elevation-2);
+  --semantic-elevation-lg: var(--elevation-3);
+  --semantic-elevation-overlay: var(--elevation-4);
+
+  /* opacity */
+  --semantic-opacity-disabled: var(--opacity-0);
+  --semantic-opacity-hover: var(--opacity-16);
+  --semantic-opacity-overlay: var(--opacity-56);
+  --semantic-opacity-scrim: var(--opacity-72);
+
+  /* motion */
+  --semantic-motion-duration-fast: var(--motion-duration-0);
+  --semantic-motion-duration-medium: var(--motion-duration-200);
+  --semantic-motion-duration-slow: var(--motion-duration-500);
+  --semantic-motion-easing-standard: 0;
+  --semantic-motion-easing-emphasised: 0;
+  --semantic-motion-easing-decelerate: 0;
+}

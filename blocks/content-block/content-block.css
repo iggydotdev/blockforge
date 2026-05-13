@@ -1,0 +1,104 @@
+/* Content Block — image + text side-by-side, with optional CTA.
+   Mobile stacks (image on top); ≥900px is a 2-col grid.
+  Add class "content-block-image-right" to flip image to the right. */
+
+.content-block {
+  display: grid;
+  gap: var(--spacing-24);
+  align-items: center;
+}
+
+.content-block .content-block-media {
+  margin: 0;
+  border-radius: var(--radius-24, 24px);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--color-shades-black-100, #f4f4f4);
+}
+
+.content-block .content-block-media picture,
+.content-block .content-block-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-block .content-block-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.content-block .content-block-eyebrow {
+  margin: 0;
+  font-size: var(--typography-size-12, 0.75rem);
+  line-height: var(--typography-line-height-16, 1rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-brand-primary-base-500, #00247a);
+}
+
+.content-block h2.content-block-title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--color-neutral-black, #111);
+}
+
+.content-block .content-block-text {
+  font-size: var(--typography-size-16, 1rem);
+  line-height: var(--typography-line-height-24, 1.5);
+  color: var(--color-neutral-700, #333);
+}
+
+.content-block .content-block-text > *:first-child { margin-top: 0; }
+.content-block .content-block-text > *:last-child { margin-bottom: 0; }
+
+/* Green-check bullets for any UL inside the body */
+.content-block .content-block-text ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.content-block .content-block-text ul li {
+  position: relative;
+  padding-left: var(--spacing-24);
+  list-style: none;
+}
+
+.content-block .content-block-text ul li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--color-status-success-500, #128750);
+}
+
+.content-block a.button.content-block-cta {
+  align-self: flex-start;
+  margin-top: var(--spacing-8);
+}
+
+/* Two-column layout from 900px up (only when an image is present) */
+@media (width >= 900px) {
+  .content-block:not(.content-block-no-image) {
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--spacing-48, 3rem);
+  }
+
+  .content-block.content-block-image-right .content-block-media {
+    order: 2;
+  }
+
+  .content-block.content-block-image-right .content-block-body {
+    order: 1;
+  }
+}

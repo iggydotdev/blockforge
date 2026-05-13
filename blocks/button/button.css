@@ -1,0 +1,154 @@
+/* buttons */
+a.button:any-link,
+button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--semantic-spacing-inline-xs);
+  max-width: 100%;
+  margin: 12px 0;
+  border: var(--semantic-border-2) solid transparent;
+  border-radius: var(--semantic-radius-full);
+  padding: var(--semantic-spacing-inset-action-vertical-default) var(--semantic-spacing-inset-action-horizontal-default);
+  font-family: var(--semantic-typography-action-primary-lg-font-family);
+  font-size: var(--semantic-typography-action-primary-lg-font-size);
+  font-weight: var(--semantic-typography-action-primary-lg-font-weight);
+  line-height: var(--semantic-typography-action-primary-lg-line-height);
+  letter-spacing: var(--semantic-typography-action-primary-lg-letter-spacing);
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--semantic-color-action-primary-default);
+  color: var(--semantic-color-text-on-action-inverse-default);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background-color var(--semantic-motion-duration-medium, 200ms) ease,
+    color var(--semantic-motion-duration-medium, 200ms) ease,
+    border-color var(--semantic-motion-duration-medium, 200ms) ease;
+}
+
+a.button:hover,
+button:hover {
+  background-color: var(--semantic-color-action-primary-hover);
+  color: var(--semantic-color-text-on-action-inverse-hover);
+}
+
+a.button:active,
+button:active {
+  background-color: var(--semantic-color-action-primary-active);
+  color: var(--semantic-color-text-on-action-inverse-pressed);
+}
+
+a.button:focus-visible,
+button:focus-visible {
+  outline: var(--semantic-border-2) solid var(--semantic-color-focus-ring);
+  outline-offset: var(--spacing-2);
+}
+
+button:disabled,
+button:disabled:hover,
+a.button[aria-disabled='true'],
+a.button[aria-disabled='true']:hover {
+  background-color: var(--semantic-color-action-primary-disabled);
+  color: var(--semantic-color-text-on-action-default-disabled);
+  cursor: not-allowed;
+}
+
+/* small size */
+a.button.small,
+button.small {
+  gap: var(--semantic-spacing-inline-xs);
+  padding: var(--semantic-spacing-inset-action-vertical-small) var(--semantic-spacing-inset-action-horizontal-small);
+  font-size: var(--semantic-typography-action-primary-sm-font-size);
+  font-weight: var(--semantic-typography-action-primary-sm-font-weight);
+  line-height: var(--semantic-typography-action-primary-sm-line-height);
+  letter-spacing: var(--semantic-typography-action-primary-sm-letter-spacing);
+}
+
+/* secondary */
+a.button.secondary,
+button.secondary {
+  background-color: var(--semantic-color-action-secondary-default);
+  color: var(--semantic-color-text-on-action-default-default);
+}
+
+a.button.secondary:hover,
+button.secondary:hover {
+  background-color: var(--semantic-color-action-secondary-hover);
+  color: var(--semantic-color-text-on-action-default-hover);
+}
+
+a.button.secondary:active,
+button.secondary:active {
+  background-color: var(--semantic-color-action-secondary-active);
+  color: var(--semantic-color-text-on-action-default-pressed);
+}
+
+/* tertiary (outlined) */
+a.button.tertiary,
+button.tertiary {
+  background-color: transparent;
+  border-color: var(--semantic-color-border-action-default);
+  color: var(--semantic-color-text-on-action-default-default);
+}
+
+a.button.tertiary:hover,
+button.tertiary:hover {
+  background-color: var(--semantic-color-action-tertiary-default);
+  border-color: var(--semantic-color-border-action-hover);
+  color: var(--semantic-color-text-on-action-default-hover);
+}
+
+a.button.tertiary:active,
+button.tertiary:active {
+  background-color: var(--semantic-color-action-tertiary-pressed);
+  border-color: var(--semantic-color-border-action-pressed);
+  color: var(--semantic-color-text-on-action-default-pressed);
+}
+
+/* inverse (on dark surfaces) */
+a.button.inverse,
+button.inverse {
+  background-color: var(--semantic-color-action-inverse-default);
+  color: var(--semantic-color-text-on-action-default-default);
+}
+
+a.button.inverse:hover,
+button.inverse:hover {
+  background-color: var(--semantic-color-action-inverse-hover);
+}
+
+a.button.inverse:active,
+button.inverse:active {
+  background-color: var(--semantic-color-action-inverse-active);
+}
+
+/* icon support inside buttons */
+button .icon,
+a.button .icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: var(--semantic-typography-action-primary-lg-line-height);
+  height: var(--semantic-typography-action-primary-lg-line-height);
+}
+
+button.small .icon,
+a.button.small .icon {
+  width: var(--semantic-typography-action-primary-sm-line-height);
+  height: var(--semantic-typography-action-primary-sm-line-height);
+}
+
+button .icon img,
+a.button .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+button .icon svg,
+a.button .icon svg {
+  fill: currentcolor;
+  width: 100%;
+  height: 100%;
+}

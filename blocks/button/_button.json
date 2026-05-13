@@ -1,0 +1,148 @@
+{
+  "definitions": [
+    {
+      "title": "Button",
+      "id": "button",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Button",
+              "model": "button"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "button",
+      "fields": [
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "linkTitle",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "linkType",
+          "label": "Variant",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
+          ]
+        },
+        
+        {
+          "component": "container",
+          "label": "With Icon",
+          "name": "withIcon",
+          "valueType": "string",
+          "collapsible": true,
+          "fields": [
+            {
+                "component":"boolean",
+                "name":"hasLeftIcon",
+                "label":"Icon left",
+                "valueType": "boolean"
+            },
+            {
+                "component": "select",
+                "name": "leftIcon",
+                "label": "Left Icon",
+                "condition": {
+                    "===": [{
+                    "var": "hasLeftIcon"
+                    }, true]
+                },
+                "options": [
+                    {
+                      "name": "None",
+                      "value": ""
+                    },
+                    {
+                        "name": "shopping cart",
+                        "value": "shopping-cart"
+                    },
+                    {
+                        "name": "left arrow",
+                        "value": "left-arrow"
+                    },
+                    {
+                        "name": "right arrow",
+                        "value": "right-arrow"
+                    },
+                    {
+                        "name": "search",
+                        "value": "search"
+                    }
+                ]
+            },
+            {
+                "component":"boolean",
+                "name":"hasRightIcon",
+                "label":"Icon right",
+                "value": false
+            },
+            {
+                "component":"select",
+                "name":"rightIcon",
+                "label":"Right icon asset",
+                "value": "",
+                "condition": {
+                    "===": [{
+                    "var": "hasRightIcon"
+                    }, true]
+                },
+                "options": [
+                    {
+                      "name": "None",
+                      "value": ""
+                    },
+                    {
+                    "name": "shopping cart",
+                    "value": "shopping-cart"
+                    },
+                    {
+                    "name": "left arrow",
+                    "value": "left-arrow"
+                    },
+                    {
+                    "name": "right arrow",
+                    "value": "right-arrow"
+                    },
+                    {
+                    "name": "search",
+                    "value": "search"
+                    }
+                ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters":[]
+}

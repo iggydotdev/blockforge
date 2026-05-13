@@ -7,3 +7,13 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+
+# Agent pipeline state — ephemeral per-ticket working memory
+.state/*
+!.state/README.md
+
+# Throwaway test artifacts
+drafts/tmp/*
+test/tmp/*
+.certs/*
+.env

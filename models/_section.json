@@ -33,6 +33,26 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Card Collection",
+              "value": "card-collection"
+            },
+            {
+              "name": "Articles Layout (title + button + articles)",
+              "value": "articles-layout"
+            },
+            {
+              "name": "Section Header Row (title + button)",
+              "value": "section-header-row"
+            },
+            {
+              "name": "Stats Layout (title + stats)",
+              "value": "stats-layout"
+            },
+            {
+              "name": "Benefits Layout (deprecated, use Section Header Row)",
+              "value": "benefits-layout"
             }
           ]
         }
@@ -43,14 +63,37 @@
     {
       "id": "section",
       "components": [
-        "text",
-        "image",
+        "accordion",
+        "accordions",
+        "articles",
+        "banner",
+        "benefits",
         "button",
-        "title",
-        "hero",
+        "carousel",
         "cards",
         "columns",
-        "fragment"
+        "content-block",
+        "divider",
+        "embed",
+        "fcards",
+        "form",
+        "fragment",
+        "gallery",
+        "hero",
+        "hero-carousel",
+        "html",
+        "icard",
+        "image",
+        "product-cards",
+        "promo-banner",
+        "quote",
+        "search",
+        "stats",
+        "table",
+        "tabs",
+        "text",
+        "title",
+        "video"
       ]
     }
   ]

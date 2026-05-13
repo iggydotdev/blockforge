@@ -1,0 +1,100 @@
+{
+  "definitions": [
+    {
+      "title": "Content Block",
+      "id": "content-block",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Content Block",
+              "model": "content-block"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "content-block",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image (optional)",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "eyebrow",
+          "label": "Eyebrow (small label above title)",
+          "description": "Short uppercase label, e.g. \"Insurance\".",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Title (large heading)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Body Content",
+          "description": "Paragraphs and a bulleted list (rendered with green checkmarks).",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "cta_link",
+          "label": "CTA Link (optional)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "cta_linkText",
+          "label": "CTA Text",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "cta_linkType",
+          "label": "CTA Variant",
+          "value": "primary",
+          "options": [
+            { "name": "Primary (yellow)", "value": "primary" },
+            { "name": "Secondary", "value": "secondary" },
+            { "name": "Tertiary", "value": "tertiary" },
+            { "name": "Default link", "value": "" }
+          ]
+        },
+        {
+          "component": "multiselect",
+          "valueType": "string",
+          "name": "classes",
+          "label": "Variant",
+          "description": "Layout options for this block.",
+          "value": "",
+          "options": [
+            { "name": "Image on right", "value": "content-block-image-right" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

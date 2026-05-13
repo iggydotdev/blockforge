@@ -1,0 +1,249 @@
+/*
+ * AUTO-GENERATED FROM docs/RACQ.primitives.json
+ * Do not edit by hand. Run the build script to regenerate.
+ */
+
+:root {
+  /* typography */
+  --typography-family-primary: 'Rubik';
+  --typography-family-secondary: 'Inter';
+  --typography-weight-light: 300;
+  --typography-weight-regular: 400;
+  --typography-weight-medium: 500;
+  --typography-weight-semibold: 600;
+  --typography-weight-bold: 700;
+  --typography-size-12: 12px;
+  --typography-size-14: 14px;
+  --typography-size-16: 16px;
+  --typography-size-18: 18px;
+  --typography-size-20: 20px;
+  --typography-size-22: 22px;
+  --typography-size-24: 24px;
+  --typography-size-28: 28px;
+  --typography-size-32: 32px;
+  --typography-size-36: 36px;
+  --typography-size-40: 40px;
+  --typography-size-48: 48px;
+  --typography-size-56: 56px;
+  --typography-size-64: 64px;
+  --typography-size-68: 68px;
+  --typography-size-72: 72px;
+  --typography-line-height-12: 12px;
+  --typography-line-height-14: 14px;
+  --typography-line-height-16: 16px;
+  --typography-line-height-18: 18px;
+  --typography-line-height-20: 20px;
+  --typography-line-height-22: 22px;
+  --typography-line-height-24: 24px;
+  --typography-line-height-28: 28px;
+  --typography-line-height-32: 32px;
+  --typography-line-height-36: 36px;
+  --typography-line-height-40: 40px;
+  --typography-line-height-48: 48px;
+  --typography-line-height-56: 56px;
+  --typography-line-height-64: 64px;
+  --typography-line-height-72: 72px;
+  --typography-letter-spacing-0: 0;
+  --typography-letter-spacing-1: 1;
+  --typography-letter-spacing-2: 2;
+  --typography-letter-spacing-3: 3;
+  --typography-letter-spacing-4: 4;
+  --typography-letter-spacing-5: 5;
+  --typography-letter-spacing-6: 6;
+  --typography-letter-spacing-7: 7;
+  --typography-letter-spacing-minus-3: -3;
+  --typography-letter-spacing-minus-2: -2;
+  --typography-letter-spacing-minus-1: -1;
+  --typography-paragraph-spacing-8: 8px;
+  --typography-paragraph-spacing-10: 10px;
+  --typography-paragraph-spacing-12: 12px;
+  --typography-paragraph-spacing-14: 14px;
+  --typography-paragraph-spacing-16: 16px;
+  --typography-paragraph-spacing-18: 18px;
+  --typography-paragraph-spacing-20: 20px;
+  --typography-paragraph-spacing-22: 22px;
+  --typography-paragraph-spacing-24: 24px;
+  --typography-list-spacing-4: 4px;
+  --typography-list-spacing-6: 6px;
+  --typography-list-spacing-8: 8px;
+  --typography-list-spacing-10: 10px;
+  --typography-list-spacing-12: 12px;
+  --typography-list-spacing-14: 14px;
+  --typography-list-spacing-16: 16px;
+  --typography-list-spacing-18: 18px;
+  --typography-list-spacing-20: 20px;
+  --typography-list-spacing-22: 22px;
+  --typography-list-spacing-24: 24px;
+
+  /* color */
+  --color-brand-primary-base-50: #f2f4f8;
+  --color-brand-primary-base-100: #e5e9f2;
+  --color-brand-primary-base-150: #bfc8de;
+  --color-brand-primary-base-200: #99a7ca;
+  --color-brand-primary-base-300: #7387b6;
+  --color-brand-primary-base-400: #4d66a2;
+  --color-brand-primary-base-450: #26458e;
+  --color-brand-primary-base-500: #00247a;
+  --color-brand-primary-base-600: #001f68;
+  --color-brand-primary-base-650: #001955;
+  --color-brand-primary-base-700: #001443;
+  --color-brand-primary-base-800: #000e31;
+  --color-brand-primary-base-900: #00091f;
+  --color-brand-primary-accent-100: #e5ebf1;
+  --color-brand-primary-accent-300: #738fb5;
+  --color-brand-primary-accent-500: #003478;
+  --color-brand-primary-accent-700: #001d42;
+  --color-brand-secondary-base-50: #fffef2;
+  --color-brand-secondary-base-100: #fffce5;
+  --color-brand-secondary-base-150: #fff9bf;
+  --color-brand-secondary-base-200: #fff599;
+  --color-brand-secondary-base-300: #fff173;
+  --color-brand-secondary-base-400: #ffee4d;
+  --color-brand-secondary-base-450: #ffea26;
+  --color-brand-secondary-base-500: #ffe600;
+  --color-brand-secondary-base-600: #d9c400;
+  --color-brand-secondary-base-650: #b2a100;
+  --color-brand-secondary-base-700: #8c7f00;
+  --color-brand-secondary-base-800: #665c00;
+  --color-brand-secondary-base-900: #403a00;
+  --color-brand-secondary-accent-50: #f5f2e7;
+  --color-brand-secondary-accent-100: #efead7;
+  --color-brand-secondary-accent-300: #fdd281;
+  --color-brand-secondary-accent-500: #fbad1a;
+  --color-brand-secondary-accent-700: #8a5f0e;
+  --color-neutral-100: #d9e3e8;
+  --color-neutral-200: #b4b9c1;
+  --color-neutral-300: #7d8f99;
+  --color-neutral-400: #697482;
+  --color-neutral-500: #455770;
+  --color-neutral-600: #36414f;
+  --color-neutral-700: #29313b;
+  --color-neutral-800: #1b2028;
+  --color-neutral-900: #0e1014;
+  --color-neutral-white: #fff;
+  --color-neutral-black: #000;
+  --color-status-success-100: #dbede5;
+  --color-status-success-300: #a0cfb9;
+  --color-status-success-500: #128750;
+  --color-status-success-700: #0a4a2c;
+  --color-status-danger-100: #f9dfd9;
+  --color-status-danger-300: #efa999;
+  --color-status-danger-500: #d82900;
+  --color-status-danger-700: #771700;
+  --color-status-warning-100: #ffefd9;
+  --color-status-warning-300: #ffd399;
+  --color-status-warning-500: #ff9200;
+  --color-status-warning-700: #8c5000;
+  --color-status-info-100: #dae8f5;
+  --color-status-info-300: #9cc1e4;
+  --color-status-info-500: #0864bc;
+  --color-status-info-700: #043767;
+  --color-member-teal: #74bfb8;
+  --color-member-blue: #1d96cd;
+  --color-member-bronze: #b06c32;
+  --color-member-silver: #7e8990;
+  --color-member-gold: #897755;
+  --color-member-gold50: #b9983c;
+  --color-shades-black-100: rgb(0 0 0 / 10%);
+  --color-shades-black-200: rgb(0 0 0 / 20%);
+  --color-shades-black-300: rgb(0 0 0 / 30%);
+  --color-shades-black-400: rgb(0 0 0 / 40%);
+  --color-shades-black-500: rgb(0 0 0 / 50%);
+  --color-shades-black-600: rgb(0 0 0 / 60%);
+  --color-shades-black-700: rgb(0 0 0 / 70%);
+  --color-shades-black-800: rgb(0 0 0 / 80%);
+  --color-shades-black-900: rgb(0 0 0 / 90%);
+  --color-shades-white-100: rgb(255 255 255 / 10%);
+  --color-shades-white-200: rgb(255 255 255 / 20%);
+  --color-shades-white-300: rgb(255 255 255 / 30%);
+  --color-shades-white-400: rgb(255 255 255 / 40%);
+  --color-shades-white-500: rgb(255 255 255 / 50%);
+  --color-shades-white-600: rgb(255 255 255 / 60%);
+  --color-shades-white-700: rgb(255 255 255 / 70%);
+  --color-shades-white-800: rgb(255 255 255 / 80%);
+  --color-shades-white-900: rgb(255 255 255 / 90%);
+
+  /* spacing */
+  --spacing-0: 0px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-30: 30px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-60: 60px;
+  --spacing-64: 64px;
+  --spacing-72: 72px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-100: 100px;
+  --spacing-120: 120px;
+  --spacing-128: 128px;
+  --spacing-140: 140px;
+
+  /* size */
+  --size-12: 12px;
+  --size-16: 16px;
+  --size-20: 20px;
+  --size-24: 24px;
+  --size-32: 32px;
+  --size-40: 40px;
+  --size-48: 48px;
+  --size-56: 56px;
+  --size-64: 64px;
+
+  /* radius */
+  --radius-0: 0px;
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-48: 48px;
+  --radius-full: 9999px;
+
+  /* border */
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-4: 4px;
+
+  /* stroke */
+  --stroke-1: 1px;
+  --stroke-2: 2px;
+  --stroke-3: 3px;
+  --stroke-4: 4px;
+  --stroke-1-5: 1.5px;
+
+  /* elevation */
+  --elevation-0: 0;
+  --elevation-1: 1;
+  --elevation-2: 2;
+  --elevation-3: 3;
+  --elevation-4: 4;
+
+  /* opacity */
+  --opacity-0: 0;
+  --opacity-16: 16;
+  --opacity-38: 38;
+  --opacity-56: 56;
+  --opacity-72: 72;
+
+  /* motion */
+  --motion-duration-0: 0ms;
+  --motion-duration-100: 100ms;
+  --motion-duration-200: 200ms;
+  --motion-duration-300: 300ms;
+  --motion-duration-500: 500ms;
+  --motion-easing-standard: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  --motion-easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --motion-easing-accelereate: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+  --motion-easing-emphasised: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+}

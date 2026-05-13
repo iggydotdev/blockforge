@@ -6,6 +6,7 @@ import {
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
+  getMetadata,
   waitForFirstImage,
   loadSection,
   loadSections,
@@ -46,6 +47,17 @@ export function moveInstrumentation(from, to) {
   );
 }
 
+function autolinkModals(doc) {
+  doc.addEventListener('click', async (e) => {
+    const origin = e.target.closest('a');
+    if (origin && origin.href && origin.href.includes('/modals/')) {
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal(origin.href);
+    }
+  });
+}
+
 /**
  * load fonts.css and set a session storage flag
  */
@@ -71,6 +83,18 @@ function buildAutoBlocks() {
   }
 }
 
+function a11yLinks(main) {
+  const links = main.querySelectorAll('a');
+  links.forEach((link) => {
+    let label = link.textContent;
+    if (!label && link.querySelector('span.icon')) {
+      const icon = link.querySelector('span.icon');
+      label = icon ? icon.classList[1]?.split('-')[1] : label;
+    }
+    link.setAttribute('aria-label', label);
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -83,6 +107,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  a11yLinks(main);
 }
 
 /**
@@ -90,12 +115,15 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  doc.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
+    doc.body.dataset.breadcrumbs = true;
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    document.body.classList.add('appear');
+    doc.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
@@ -114,6 +142,7 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
+  autolinkModals(doc);
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
@@ -127,6 +156,25 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+}
+
+export async function inlineSVGs(container) {
+  const icons = container.querySelectorAll('span.icon img[src$=".svg"]');
+  await Promise.all([...icons].map(async (img) => {
+    try {
+      const resp = await fetch(img.src);
+      if (!resp.ok) return;
+      const svg = await resp.text();
+      const tmp = document.createElement('div');
+      tmp.innerHTML = svg;
+      const svgEl = tmp.querySelector('svg');
+      if (svgEl) {
+        svgEl.setAttribute('focusable', 'false');
+        svgEl.setAttribute('aria-hidden', 'true');
+        img.replaceWith(svgEl);
+      }
+    } catch (e) { /* skip */ }
+  }));
 }
 
 /**

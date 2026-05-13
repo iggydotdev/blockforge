@@ -1,0 +1,99 @@
+/* Stats block — value, description, icon. Pair with the section style
+   "Stats Layout (title + stats)" to place heading left and stats right. */
+
+.stats {
+  --stats-divider: var(--color-neutral-200);
+  --stats-value-fg: var(--color-brand-primary-base-500);
+  --stats-copy-fg: var(--color-neutral-700);
+
+  display: block;
+}
+
+.stats .stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-24);
+}
+
+.stats .stat-item {
+  margin: 0;
+  padding: var(--spacing-24) 0;
+  border-top: var(--border-1) solid var(--stats-divider);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.stats .stat-item-value {
+  margin: 0;
+  color: var(--stats-value-fg);
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-56);
+  line-height: var(--typography-line-height-64);
+  font-weight: var(--typography-weight-regular);
+  letter-spacing: -0.03em;
+}
+
+.stats .stat-item-description {
+  margin: 0;
+  color: var(--stats-copy-fg);
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-18);
+  line-height: var(--typography-line-height-24);
+  font-weight: var(--typography-weight-regular);
+}
+
+.stats .stat-item-icon {
+  margin-top: auto;
+  height: var(--size-48);
+  display: flex;
+  align-items: flex-end;
+}
+
+.stats .stat-item-icon picture,
+.stats .stat-item-icon img {
+  display: block;
+  width: var(--size-48);
+  height: var(--size-48);
+  object-fit: contain;
+}
+
+@media (width >= 600px) {
+  .stats .stats-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-24);
+  }
+
+  .stats .stat-item {
+    min-height: 220px;
+    border-top: var(--border-1) solid var(--stats-divider);
+  }
+
+  .stats .stat-item:nth-child(even) {
+    padding-left: var(--spacing-24);
+    border-left: var(--border-1) solid var(--stats-divider);
+  }
+}
+
+@media (width >= 900px) {
+  .stats .stats-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border-left: var(--border-1) solid var(--stats-divider);
+    padding-left: var(--spacing-32);
+  }
+
+  .stats .stat-item {
+    min-height: 270px;
+    padding: 0 var(--spacing-32) 0 0;
+    border-top: none;
+  }
+
+  .stats .stat-item + .stat-item {
+    padding-left: var(--spacing-32);
+    border-left: var(--border-1) solid var(--stats-divider);
+  }
+}

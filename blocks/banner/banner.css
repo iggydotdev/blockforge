@@ -1,0 +1,169 @@
+/* Banner — full-bleed split section: dark navy text panel (left) + clipped image (right).
+   All visual values come from styles/variables.css.
+
+   Layout:
+     Mobile  — stacked (text above image)
+     ≥ 900px — side-by-side, image gets a concave left-edge clip-path
+*/
+
+/* Full-bleed: lift the section wrapper's max-width/padding constraints. */
+.banner-container .banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.banner {
+  background-color: var(--color-brand-primary-base-500);
+}
+
+.banner-inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ── Text panel ──────────────────────────────────────────────────────────── */
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  padding: var(--spacing-48) var(--spacing-24);
+  justify-content: center;
+}
+
+.banner-heading {
+  margin: 0;
+  font-family: var(--typography-family-primary);
+  font-size: var(--typography-size-28);
+  font-weight: var(--typography-weight-regular);
+  line-height: var(--typography-line-height-36);
+  letter-spacing: -0.03em;
+  color: var(--color-neutral-white);
+}
+
+.banner-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-48);
+}
+
+.banner-body p {
+  margin: 0;
+  font-family: var(--typography-family-secondary);
+  font-size: var(--typography-size-18);
+  line-height: var(--typography-line-height-28);
+  letter-spacing: -0.01em;
+  color: rgb(255 255 255 / 85%);
+}
+
+/* Ghost / outline CTA button */
+.banner-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px var(--spacing-40);
+  border: 1px solid var(--color-neutral-white);
+  border-radius: var(--radius-full);
+  font-family: var(--typography-family-secondary);
+  font-size: var(--typography-size-18);
+  font-weight: var(--typography-weight-semibold);
+  line-height: var(--typography-line-height-28);
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-white);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.banner-cta:hover,
+.banner-cta:focus-visible {
+  background-color: rgb(255 255 255 / 12%);
+  outline: none;
+}
+
+/* ── Image panel ─────────────────────────────────────────────────────────── */
+
+.banner-media-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.banner-media {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Tablet ──────────────────────────────────────────────────────────────── */
+
+@media (width >= 600px) {
+  .banner-heading {
+    font-size: var(--typography-size-32);
+    line-height: var(--typography-line-height-40);
+  }
+
+  .banner-content {
+    padding: var(--spacing-48) var(--spacing-32);
+  }
+}
+
+/* ── Desktop ─────────────────────────────────────────────────────────────── */
+
+@media (width >= 900px) {
+  .banner-inner {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 500px;
+  }
+
+  .banner-content {
+    flex: 0 0 50%;
+    padding: var(--spacing-80) var(--spacing-64);
+  }
+
+  /* Image panel: fills remaining space; clip-path creates concave left edge */
+  .banner-media-wrap {
+    flex: 1 1 0;
+    aspect-ratio: unset;
+    overflow: visible; /* allow accent to peek below */
+  }
+
+  .banner-media {
+    clip-path: url('#banner-image-clip');
+  }
+
+  /* RACQ yellow brand accent — ellipse peeking at the bottom-right corner */
+  .banner-media-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 48px;
+    width: 140px;
+    height: 68px;
+    background: var(--color-brand-secondary-base-500);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+@media (width >= 1200px) {
+  .banner-content {
+    padding: var(--spacing-128) var(--spacing-64) var(--spacing-128) var(--spacing-96);
+  }
+}

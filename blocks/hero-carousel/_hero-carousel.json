@@ -1,0 +1,97 @@
+{
+  "definitions": [
+    {
+      "title": "Hero Carousel",
+      "id": "hero-carousel",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Hero Carousel",
+              "filter": "hero-carousel"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Hero Slide",
+      "id": "hero-slide",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Hero Slide",
+              "model": "hero-slide"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "hero-slide",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "text-input",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Heading"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Body Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "ctaPrimary",
+          "label": "Primary CTA Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaPrimaryText",
+          "label": "Primary CTA Label"
+        },
+        {
+          "component": "aem-content",
+          "name": "ctaSecondary",
+          "label": "Secondary CTA Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaSecondaryText",
+          "label": "Secondary CTA Label"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "hero-carousel",
+      "components": [
+        "hero-slide"
+      ]
+    }
+  ]
+}

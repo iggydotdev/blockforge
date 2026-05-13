@@ -1,0 +1,21 @@
+.divider hr {
+  border: none;
+  border-top: 1px solid var(--semantic-color-border-default, var(--color-neutral-base-300, #ccc));
+  margin: var(--spacing-24, 24px) 0;
+}
+
+.divider hr.thick {
+  border-top-width: 3px;
+}
+
+.divider hr.dashed {
+  border-top-style: dashed;
+}
+
+.divider hr.dotted {
+  border-top-style: dotted;
+}
+
+.divider hr.colored {
+  border-top-color: var(--semantic-color-action-primary-default, var(--color-brand-primary-base-500, #003da5));
+}

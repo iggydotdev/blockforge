@@ -1,0 +1,83 @@
+{
+    "definition":[],
+    "models": [],
+    "filters": [
+        {
+            "id": "richtext",
+            "rte": {
+                "toolbar": {
+                    "format": [
+                        "bold",
+                        "italic"
+                    ],
+                    "blocks": [
+                        "paragraph",
+                        "h1",
+                        "h2"
+                    ],
+                    "list": [
+                        "bullet_list",
+                        "ordered_list"
+                    ],
+                    "insert": [
+                        "link",
+                        "unlink",
+                        "image",
+                        "special_characters"
+                    ],
+                    "sections": [
+                        "format",
+                        "blocks",
+                        "list",
+                        "insert"
+                    ]
+                },
+                "actions": {
+                    "bold": {
+                        "tag": "strong",
+                        "shortcut": "Mod-B",
+                        "label": "Bold"
+                    },
+                    "italic": {
+                        "tag": "em",
+                        "shortcut": "Mod-I"
+                    },
+                    "bullet_list": {
+                        "wrapInParagraphs": true,
+                        "label": "Bullet List"
+                    },
+                    "ordered_list": {
+                        "wrapInParagraphs": false
+                    },
+                    "link": {
+                        "hideTarget": false,
+                        "shortcut": "Mod-K",
+                        "label": "Add Link"
+                    },
+                    "unlink": {
+                        "label": "Remove Link"
+                    },
+                    "image": {
+                        "wrapInPicture": false,
+                        "shortcut": "Mod-Shift-I",
+                        "label": "Insert Image"
+                    },
+                    "special_characters": {
+                        "label": "Special Characters",
+                        "appendCharacters": [
+                            {
+                                "character": "\u2605",
+                                "title": "Black star"
+                            }
+                        ]
+                    },
+                    "h1": {
+                        "shortcut": "Mod-Alt-1",
+                        "label": "Main Heading"
+                    }
+                }
+            },
+            "components": ["richtext"]
+        }
+    ]
+}
