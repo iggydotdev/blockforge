@@ -5,11 +5,31 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
+    li.className = 'accordion';
     moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      div.className = 'accordion-body';
-    });
+
+    const rows = [...row.children];
+    const labelRow = rows[0];
+    const bodyRow = rows[1];
+
+    const labelCell = labelRow?.firstElementChild;
+    const bodyCell = bodyRow?.firstElementChild;
+
+    if (!labelCell || !bodyCell) return;
+
+    const summary = document.createElement('summary');
+    summary.className = 'accordion-label';
+    summary.append(...labelCell.childNodes);
+
+    const body = document.createElement('div');
+    body.className = 'accordion-body';
+    body.append(...bodyCell.childNodes);
+
+    const details = document.createElement('details');
+    details.append(summary, body);
+
+    li.replaceChildren(details);
+
     ul.append(li);
   });
   block.replaceChildren(ul);
