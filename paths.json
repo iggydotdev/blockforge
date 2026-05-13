@@ -1,8 +1,12 @@
 {
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/:/",
+    "/content/blockforge/:/",
+    "/content/blockforge/configuration:/.helix/config.json",
+    "/content/blockforge/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/",
+    "/content/dam/"
   ]
 }
