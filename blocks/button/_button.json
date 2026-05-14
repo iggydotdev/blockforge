@@ -33,7 +33,12 @@
         {
           "component": "text",
           "name": "linkTitle",
-          "label": "Title"
+          "label": "Title",
+          "validation": {
+            "minLength": 5,
+            "maxLength": 50,
+            "customErrorMsg": "Please enter between 5 and 50 characters."
+          }
         },
         {
           "component": "select",
@@ -54,7 +59,12 @@
             }
           ]
         },
-        
+        {
+          "component": "boolean",
+          "name": "openInNewTab",
+          "label": "Open in a new Tab?",
+          "value": false
+        },
         {
           "component": "container",
           "label": "With Icon",

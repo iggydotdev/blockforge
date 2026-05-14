@@ -581,7 +581,7 @@
 
   /* colors */
   --background-color: white;
-  --light-color: #f8f8f8;
+  --light-color: var(--color-brand-secondary-accent-50);
   --dark-color: #505050;
   --text-color: #131313;
   --link-color: #3b63fb;

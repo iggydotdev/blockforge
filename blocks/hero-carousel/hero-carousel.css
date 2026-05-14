@@ -1,11 +1,14 @@
-/* Hero Carousel — full-bleed banner carousel with auto-advancing slides.
+/* Hero Carousel — full-bleed white hero with image curving in from the right.
 
-   Each slide mirrors the standalone Banner block visual treatment:
-   navy text panel (left) + clipped image with concave left edge (right) + yellow accent.
+   Three visual layers (back → front):
+     1. Background — white, with a small yellow accent in the bottom-right corner.
+     2. Image      — anchored to the right edge, clipped with a concave left edge
+                     so it sweeps into the text area at the bottom-left.
+     3. Content    — heading, body and CTAs sitting on the left over the white.
 
    Layout:
-     Mobile  — stacked (text above image)
-     ≥ 900px — side-by-side, image gets a concave left-edge clip-path
+     Mobile  — stacked (image above text).
+     ≥ 900px — image overlays the right half of the section, text floats on the left.
 
    All visual values come from styles/variables.css.
 */
@@ -16,13 +19,14 @@
   padding: 0;
 }
 
+/* Layer 1 — background ----------------------------------------------------- */
 .hero-carousel {
   position: relative;
-  background-color: var(--color-brand-primary-base-500);
+  background-color: var(--color-neutral-white);
   overflow: hidden;
 }
 
-/* ── Slides container ────────────────────────────────────────────────────── */
+/* ── Slides ────────────────────────────────────────────────────────────── */
 
 .hero-carousel-slides {
   list-style: none;
@@ -34,6 +38,7 @@
 .hero-carousel-slide {
   display: none;
   flex-direction: column;
+  position: relative;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -42,24 +47,25 @@
   display: flex;
 }
 
-/* ── Text panel ──────────────────────────────────────────────────────────── */
-
+/* Layer 3 — content panel (left) ------------------------------------------ */
 .hero-carousel-content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-32);
   padding: var(--spacing-48) var(--spacing-24);
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-carousel-heading {
   margin: 0;
   font-family: var(--typography-family-primary);
-  font-size: var(--typography-size-28);
-  font-weight: var(--typography-weight-regular);
-  line-height: var(--typography-line-height-36);
-  letter-spacing: -0.03em;
-  color: var(--color-neutral-white);
+  font-size: var(--typography-size-36, 36px);
+  font-weight: var(--typography-weight-medium);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-primary-accent-500);
 }
 
 .hero-carousel-body {
@@ -74,11 +80,11 @@
   font-size: var(--typography-size-18);
   line-height: var(--typography-line-height-28);
   letter-spacing: -0.01em;
-  color: rgb(255 255 255 / 85%);
+  color: var(--color-neutral-500);
 }
 
 .hero-carousel-body a {
-  color: var(--color-neutral-white);
+  color: var(--color-brand-primary-accent-500);
   text-decoration: underline;
 }
 
@@ -87,7 +93,7 @@
 .hero-carousel-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-16);
+  gap: var(--spacing-12);
   margin-top: var(--spacing-16);
 }
 
@@ -99,12 +105,12 @@
   border-radius: var(--radius-full);
   font-family: var(--typography-family-secondary);
   font-size: var(--typography-size-16);
-  font-weight: var(--typography-weight-semibold);
+  font-weight: var(--typography-weight-medium);
   line-height: var(--typography-line-height-24);
   letter-spacing: -0.01em;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .hero-carousel-cta-primary {
@@ -115,28 +121,30 @@
 
 .hero-carousel-cta-primary:hover,
 .hero-carousel-cta-primary:focus-visible {
-  background-color: var(--color-brand-secondary-base-600, #d6c01a);
+  background-color: var(--color-brand-secondary-base-600);
+  border-color: var(--color-brand-secondary-base-600);
   outline: none;
 }
 
 .hero-carousel-cta-secondary {
   background-color: transparent;
-  color: var(--color-neutral-white);
-  border: 1px solid var(--color-neutral-white);
+  color: var(--color-brand-primary-base-500);
+  border: 1px solid var(--color-brand-primary-base-500);
 }
 
 .hero-carousel-cta-secondary:hover,
 .hero-carousel-cta-secondary:focus-visible {
-  background-color: rgb(255 255 255 / 12%);
+  background-color: var(--color-brand-primary-base-500);
+  color: var(--color-neutral-white);
   outline: none;
 }
 
-/* ── Image panel ─────────────────────────────────────────────────────────── */
-
+/* Layer 2 — image panel (right) ------------------------------------------- */
 .hero-carousel-media-wrap {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  z-index: 1;
 }
 
 .hero-carousel-media {
@@ -166,13 +174,15 @@
   padding: var(--spacing-16) var(--spacing-24);
   max-width: 1440px;
   margin: 0 auto;
+  position: relative;
+  z-index: 3;
 }
 
 .hero-carousel-indicators ol {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: var(--spacing-12);
+  gap: var(--spacing-16);
   margin: 0;
   padding: 0;
 }
@@ -183,9 +193,9 @@
   padding: 4px 2px;
   font-family: var(--typography-family-secondary);
   font-size: var(--typography-size-14);
-  font-weight: var(--typography-weight-semibold);
-  letter-spacing: 0.05em;
-  color: rgb(255 255 255 / 50%);
+  font-weight: var(--typography-weight-regular);
+  line-height: var(--typography-line-height-20, 20px);
+  color: var(--color-neutral-300);
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -193,25 +203,25 @@
 .hero-carousel-indicator button.is-active,
 .hero-carousel-indicator button:hover,
 .hero-carousel-indicator button:focus-visible {
-  color: var(--color-neutral-white);
+  color: var(--color-brand-primary-base-500);
   outline: none;
 }
 
 /* Progress bar (animates while a slide is active) */
 .hero-carousel-progress {
-  flex: 1 1 auto;
-  height: 2px;
-  background: rgb(255 255 255 / 25%);
+  flex: 0 0 auto;
+  width: 40px;
+  height: 4px;
+  background: var(--color-neutral-100);
   border-radius: 2px;
   overflow: hidden;
-  max-width: 80px;
 }
 
 .hero-carousel-progress-fill {
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--color-neutral-white);
+  background: var(--color-brand-primary-base-500);
   transform-origin: left center;
   animation: hero-carousel-progress 6s linear forwards;
 }
@@ -227,19 +237,21 @@
 
 /* Play / pause toggle */
 .hero-carousel-playpause {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: transparent;
-  border: 1px solid rgb(255 255 255 / 50%);
+  border: 1px solid var(--color-brand-primary-base-500);
   cursor: pointer;
   position: relative;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  margin-left: var(--spacing-4);
+  transition: background-color 0.2s ease;
+  padding: 0;
 }
 
 .hero-carousel-playpause:hover,
 .hero-carousel-playpause:focus-visible {
-  border-color: var(--color-neutral-white);
+  background-color: rgb(0 36 122 / 8%);
   outline: none;
 }
 
@@ -250,17 +262,17 @@
   position: absolute;
   top: 50%;
   width: 2px;
-  height: 10px;
-  background: var(--color-neutral-white);
+  height: 8px;
+  background: var(--color-brand-primary-base-500);
   transform: translateY(-50%);
 }
 
 .hero-carousel-playpause[data-state='playing']::before {
-  left: calc(50% - 4px);
+  left: calc(50% - 3px);
 }
 
 .hero-carousel-playpause[data-state='playing']::after {
-  left: calc(50% + 2px);
+  left: calc(50% + 1px);
 }
 
 /* Play glyph (triangle) when paused */
@@ -272,8 +284,8 @@
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 5px 0 5px 8px;
-  border-color: transparent transparent transparent var(--color-neutral-white);
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent var(--color-brand-primary-base-500);
   transform: translate(-40%, -50%);
 }
 
@@ -281,8 +293,7 @@
 
 @media (width >= 600px) {
   .hero-carousel-heading {
-    font-size: var(--typography-size-32);
-    line-height: var(--typography-line-height-40);
+    font-size: var(--typography-size-48, 48px);
   }
 
   .hero-carousel-content {
@@ -300,20 +311,35 @@
   .hero-carousel-slide {
     flex-direction: row;
     align-items: stretch;
-    min-height: 500px;
+    min-height: 660px;
   }
 
+  /* Content sits over the white area on the left. */
   .hero-carousel-content {
-    flex: 0 0 50%;
+    flex: 0 0 46%;
     padding: var(--spacing-80) var(--spacing-64);
+    gap: var(--spacing-40);
   }
 
   .hero-carousel-heading {
-    font-size: var(--typography-size-48, 48px);
-    line-height: var(--typography-line-height-56, 56px);
+    font-size: var(--typography-size-64, 64px);
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 
-  /* Image panel: fills remaining space; clip-path creates concave left edge */
+  .hero-carousel-body p {
+    font-size: var(--typography-size-22, 22px);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-carousel-cta {
+    padding: 19px var(--spacing-40);
+    font-size: var(--typography-size-18);
+    line-height: var(--typography-line-height-26, 26px);
+  }
+
+  /* Image fills the remaining width and gets the concave left edge. */
   .hero-carousel-media-wrap {
     flex: 1 1 0;
     aspect-ratio: unset;
@@ -324,37 +350,38 @@
     clip-path: url('#hero-carousel-image-clip');
   }
 
-  /* RACQ yellow brand accent — ellipse peeking at the bottom-right corner */
-  .hero-carousel-media-wrap::after {
+  /* Yellow accent — small wedge anchored to the very bottom-right corner.
+     Sits on the white background behind the image curve, peeking out where
+     the image lifts away from the page edge. */
+  .hero-carousel::before {
     content: '';
     position: absolute;
-    bottom: -20px;
-    right: 48px;
-    width: 140px;
-    height: 68px;
+    right: 0;
+    bottom: 0;
+    width: 180px;
+    height: 90px;
     background: var(--color-brand-secondary-base-500);
-    border-radius: 50%;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
   }
 
+  /* Indicators float over the bottom-left of the hero. */
   .hero-carousel-indicators {
     position: absolute;
-    bottom: var(--spacing-24);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    z-index: 3;
+    bottom: var(--spacing-32);
+    left: 0;
+    right: 0;
     padding: 0 var(--spacing-64);
-  }
-
-  .hero-carousel-progress {
-    max-width: 120px;
   }
 }
 
 @media (width >= 1200px) {
   .hero-carousel-content {
     padding: var(--spacing-128) var(--spacing-64) var(--spacing-128) var(--spacing-96);
+  }
+
+  .hero-carousel-indicators {
+    padding: 0 var(--spacing-96);
   }
 }

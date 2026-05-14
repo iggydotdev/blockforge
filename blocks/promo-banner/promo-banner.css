@@ -11,7 +11,8 @@
   --promo-banner-padding: var(--spacing-24);
   --promo-banner-gap: var(--spacing-16);
   --promo-banner-curve: var(--radius-48);
-  --promo-banner-badge-bg: var(--color-brand-secondary-base-300);
+  
+  --promo-banner-badge-bg: linear-gradient(70deg, #FFE600 52.43%, #FBAD1A 101.69%);
   --promo-banner-badge-fg: var(--color-brand-primary-base-500);
   --promo-banner-bg: var(--color-brand-primary-base-500);
   --promo-banner-fg: var(--color-neutral-white);
@@ -66,7 +67,7 @@ a.promo-banner-card:focus-visible .promo-banner-body :is(h1, h2, h3, h4, h5, h6)
   top: var(--spacing-16);
   left: var(--spacing-16);
   display: inline-block;
-  padding: var(--spacing-4) var(--spacing-12);
+  padding: var(--spacing-8) var(--spacing-12);
   background: var(--promo-banner-badge-bg);
   color: var(--promo-banner-badge-fg);
   border-radius: var(--radius-8);
@@ -74,6 +75,9 @@ a.promo-banner-card:focus-visible .promo-banner-body :is(h1, h2, h3, h4, h5, h6)
   font-size: var(--typography-size-14);
   line-height: var(--typography-line-height-20);
   font-weight: var(--typography-weight-semibold);
+  border-radius: 12px;
+  
+  
 }
 
 /* Body side */

@@ -286,7 +286,7 @@
               "page": {
                 "resourceType": "core/franklin/components/columns/v1/columns",
                 "template": {
-                  "columns": "2",
+                  "columns": "5",
                   "rows": "1"
                 }
               }
