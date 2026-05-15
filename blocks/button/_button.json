@@ -35,7 +35,7 @@
           "name": "linkTitle",
           "label": "Title",
           "validation": {
-            "minLength": 45,
+            "minLength": 5,
             "maxLength": 50,
             "customErrorMsg": "Please enter between 5 and 50 characters."
           }
