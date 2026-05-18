@@ -8,8 +8,22 @@
           "page": {
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "columns": "5",
-              "rows": "1"
+              "columns": "6",
+              "rows": "4"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Column",
+      "id": "column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/item",
+            "template": {
+              "name": "Column"
             }
           }
         }
@@ -33,6 +47,58 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
+        },
+        {
+            "component": "select",
+            "valueType": "string",
+            "name": "2colslayout",
+            "value": "",
+            "label": "2 columns layout",
+            "condition": {
+                    "===": [{
+                    "var": "columns"
+                    }, "2"]
+            },
+            "options": [
+              {
+                "value": "30-70",
+                "label": "30-70"
+              },
+              {
+                "value": "50-50",
+                "label": "50-50"
+              },
+              {
+                "value": "70-30",
+                "label": "70-30"
+              }
+            ]
+        },
+        {
+            "component": "select",
+            "valueType": "string",
+            "name": "1collayout",
+            "value": "",
+            "label": "1 column layout",
+            "condition": {
+                    "===": [{
+                    "var": "columns"
+                    }, "1"]
+            },
+            "options": [
+              {
+                "value": "full",
+                "label": "full"
+              },
+              {
+                "value": "half",
+                "label": "half"
+              },
+              {
+                "value": "third",
+                "label": "third"
+              }
+            ]
         }
       ]
     }
@@ -52,7 +118,10 @@
         "button",
         "title",
         "card",
-        "accordion"
+        "accordion",
+        "divider",
+        "video",
+        "quote"
       ]
     }
   ]
