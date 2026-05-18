@@ -46,14 +46,12 @@
         },
         {
             "component": "select",
-            "valueType": "string",
             "name": "2colslayout",
-            "value": "",
             "label": "2 columns layout",
             "condition": {
                     "===": [{
                     "var": "columns"
-                    }, 2]
+                    }, "2"]
             },
             "options": [
               {
@@ -72,14 +70,12 @@
         },
         {
             "component": "select",
-            "valueType": "string",
             "name": "1collayout",
-            "value": "",
             "label": "1 column layout",
             "condition": {
                     "===": [{
                     "var": "columns"
-                    }, 1]
+                    }, "1"]
             },
             "options": [
               {
