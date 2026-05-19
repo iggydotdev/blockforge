@@ -2,7 +2,10 @@
 	"servers": {
 		"atlassian": {
 			"url": "https://mcp.atlassian.com/v1/mcp",
-			"type": "http"
+			"type": "http",
+			"headers": {
+				"Authorization": "${input:atlassianToken}"
+			}
 		},
 		
 		"figma": {
@@ -10,10 +13,12 @@
 			"type": "http"
 		},
 		
-		"playwright": {
-			"command": "npx",
+		"playwright": { 
+      		"command": "/bin/zsh",
 			"args": [
-				"@playwright/mcp@latest"
+				"-i",
+				"-c",
+				"npx -y @playwright/mcp@latest"
 			],
 			"type": "stdio"
 		},
@@ -24,13 +29,31 @@
     	},
 
 		"figma-console": {
-			"command": "npx",
-			"args": ["-y", "figma-console-mcp@latest"],
+			"command": "/bin/zsh",
+			"args": [
+				"-i",
+				"-c",
+				"npx -y figma-console-mcp@latest"
+			],
+			"type": "stdio",
 			"env": {
-				"FIGMA_ACCESS_TOKEN": "figd_YOUR_TOKEN_HERE",
+				"FIGMA_ACCESS_TOKEN": "${input:figmaConsoleToken}",
 				"ENABLE_MCP_APPS": "true"
 			}
    		}
 	},
-	"inputs": []
+	"inputs": [
+		{
+			"id": "atlassianToken",
+			"type": "promptString",
+			"description": "Atlassian API Token (format: Basic <base64>)",
+			"password": true   // ← stored encrypted
+		},
+		{
+			"id": "figmaConsoleToken",
+			"type": "promptString",
+			"description": "Figma Console MCP Access Token",
+			"password": true   // ← stored encrypted
+		}
+	]
 }
