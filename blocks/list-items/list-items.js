@@ -6,7 +6,7 @@ const ICON_NAMES = ['checkmark', 'right-arrow', 'star', 'circle', 'square'];
 
 /**
  * Separate block-level setting rows from list-item content rows.
- * UE row-per-field: the container model has 3 fields (listType, orderedStyle, icon),
+ * UE row-per-field: the container model has 3 fields (listVariant, orderedStyle, icon),
  * so the first 3 rows are always settings. Remaining rows are authored items.
  */
 function parseRows(block) {
@@ -21,7 +21,7 @@ function parseRows(block) {
   settingRows.forEach((row) => {
     const text = row.textContent.trim().toLowerCase();
     if (text === 'ordered' || text === 'unordered') {
-      settings.listType = text;
+      settings.listVariant = text;
     } else if (ORDERED_STYLES.includes(text)) {
       settings.orderedStyle = text;
     } else if (ICON_NAMES.includes(text)) {
@@ -36,7 +36,7 @@ function parseRows(block) {
 export default async function decorate(block) {
   const { settings, items } = parseRows(block);
 
-  const isOrdered = settings.listType === 'ordered';
+  const isOrdered = settings.listVariant === 'ordered';
   const list = document.createElement(isOrdered ? 'ol' : 'ul');
   list.classList.add('list-items-list');
 

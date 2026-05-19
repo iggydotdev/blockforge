@@ -39,7 +39,7 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "listType",
+          "name": "listVariant",
           "label": "List Type",
           "value": "unordered",
           "options": [
@@ -59,7 +59,7 @@
           "name": "orderedStyle",
           "label": "Ordered Style",
           "condition": {
-            "===": [{ "var": "listType" }, "ordered"]
+            "===": [{ "var": "listVariant" }, "ordered"]
           },
           "options": [
             {
@@ -86,7 +86,7 @@
           "name": "icon",
           "label": "Bullet Icon",
           "condition": {
-            "===": [{ "var": "listType" }, "unordered"]
+            "===": [{ "var": "listVariant" }, "unordered"]
           },
           "options": [
             {
@@ -123,8 +123,9 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "litsItemText",
-          "label": "List Item Text"    
+          "name": "content",
+          "label": "List Item Text",
+          "value": ""
         }
       ]
     }

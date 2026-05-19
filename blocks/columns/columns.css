@@ -33,11 +33,39 @@
 }
 
 
-/* 2-column layout variants */
-.columns.layout-30-70 > div {
+/* 2-column layout variants — container */
+.columns.layout-30-70 > div,
+.columns.layout-50-50 > div,
+.columns.layout-70-30 > div {
   flex-wrap: nowrap;
 }
 
+/* item-width layout variants — container, rows wrap */
+.columns.full > div,
+.columns.half > div,
+.columns.third > div {
+  flex-wrap: wrap;
+}
+
+/* 2-column layout variants — children sizing */
+.columns.layout-50-50 > div > div {
+  flex: 0 0 50%;
+}
+
+/* item-width layout variants — children sizing */
+.columns.full > div > div {
+  flex: 0 0 100%;
+}
+
+.columns.half > div > div {
+  flex: 0 0 calc(50% - 12px);
+}
+
+.columns.third > div > div {
+  flex: 0 0 calc(33.333% - 16px);
+}
+
+/* 2-column asymmetric layout variants — children sizing */
 .columns.layout-30-70 > div > div:first-child {
   flex: 0 0 30%;
 }
@@ -46,47 +74,10 @@
   flex: 0 0 70%;
 }
 
-.columns.layout-50-50 > div {
-  flex-wrap: nowrap;
-}
-
-.columns.layout-50-50 > div > div {
-  flex: 0 0 50%;
-}
-
-.columns.layout-70-30 > div {
-  flex-wrap: nowrap;
-}
-
 .columns.layout-70-30 > div > div:first-child {
   flex: 0 0 70%;
 }
 
 .columns.layout-70-30 > div > div:last-child {
   flex: 0 0 30%;
-}
-
-/* item-width layout variants — control each item's width, rows wrap */
-.columns.full > div {
-  flex-wrap: wrap;
-}
-
-.columns.full > div > div {
-  flex: 0 0 100%;
-}
-
-.columns.half > div {
-  flex-wrap: wrap;
-}
-
-.columns.half > div > div {
-  flex: 0 0 calc(50% - 12px);
-}
-
-.columns.third > div {
-  flex-wrap: wrap;
-}
-
-.columns.third > div > div {
-  flex: 0 0 calc(33.333% - 16px);
 }

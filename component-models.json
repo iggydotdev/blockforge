@@ -897,7 +897,7 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "listType",
+        "name": "listVariant",
         "label": "List Type",
         "value": "unordered",
         "options": [
@@ -919,7 +919,7 @@
         "condition": {
           "===": [
             {
-              "var": "listType"
+              "var": "listVariant"
             },
             "ordered"
           ]
@@ -951,7 +951,7 @@
         "condition": {
           "===": [
             {
-              "var": "listType"
+              "var": "listVariant"
             },
             "unordered"
           ]
@@ -991,8 +991,9 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "litsItemText",
-        "label": "List Item Text"
+        "name": "content",
+        "label": "List Item Text",
+        "value": ""
       }
     ]
   },
