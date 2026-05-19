@@ -33,32 +33,32 @@
 }
 
 
-.columns.layout-30-70 > div {
+.columns.layout-30-70 > div > div {
   display: grid !important;
   grid-template-columns: 30% 70% !important;
 }
 
-.columns.layout-50-50 > div {
+.columns.layout-50-50 > div > div {
   display: grid !important;
   grid-template-columns: 50% 50% !important;
 }
 
-.columns.layout-70-30 > div {
+.columns.layout-70-30 > div > div {
   display: grid !important;
   grid-template-columns: 70% 30% !important;
 }
 
-.columns.full > div {
+.columns.full > div > div {
   display: grid !important;
   grid-template-columns: 100% !important; 
 }
 
-.columns.half > div {
+.columns.half > div > div {
   display: grid !important;
   grid-template-columns: 50% !important;
 }
 
-.columns.third > div {
+.columns.third > div > div {
   display: grid !important;
   grid-template-columns: 33.333% !important;
 }
