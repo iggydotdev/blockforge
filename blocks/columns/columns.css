@@ -33,32 +33,50 @@
 }
 
 
-.columns.layout-30-70 > div > div {
-  display: grid !important;
-  grid-template-columns: 30% 70% !important;
+/* 2-column layout variants */
+.columns.layout-30-70 > div {
+  flex-wrap: nowrap;
+}
+
+.columns.layout-30-70 > div > div:first-child {
+  flex: 0 0 30%;
+}
+
+.columns.layout-30-70 > div > div:last-child {
+  flex: 0 0 70%;
+}
+
+.columns.layout-50-50 > div {
+  flex-wrap: nowrap;
 }
 
 .columns.layout-50-50 > div > div {
-  display: grid !important;
-  grid-template-columns: 50% 50% !important;
+  flex: 0 0 50%;
 }
 
-.columns.layout-70-30 > div > div {
-  display: grid !important;
-  grid-template-columns: 70% 30% !important;
+.columns.layout-70-30 > div {
+  flex-wrap: nowrap;
 }
 
-.columns.full > div > div {
-  display: grid !important;
-  grid-template-columns: 100% !important; 
+.columns.layout-70-30 > div > div:first-child {
+  flex: 0 0 70%;
 }
 
-.columns.half > div > div {
-  display: grid !important;
-  grid-template-columns: 50% !important;
+.columns.layout-70-30 > div > div:last-child {
+  flex: 0 0 30%;
 }
 
-.columns.third > div > div {
-  display: grid !important;
-  grid-template-columns: 33.333% !important;
+/* 1-column layout variants */
+.columns.full > div {
+  max-width: 100%;
+}
+
+.columns.half > div {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.columns.third > div {
+  max-width: 33.333%;
+  margin: 0 auto;
 }
