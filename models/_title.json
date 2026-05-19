@@ -26,7 +26,7 @@
         },
         {
           "component": "select",
-          "name": "titleType",
+          "name": "titleVariant",
           "label": "Title Type",
           "options": [
             {
