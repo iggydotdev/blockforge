@@ -31,53 +31,20 @@
           "label": "Rows"
         },
         {
-            "component": "select",
-            "name": "classes",
-            "label": "2 columns layout",
-            "condition": {
-                    "===": [{
-                    "var": "columns"
-                    }, "2"]
-            },
-            "options": [
-              
-              {
-                "name": "layout-30-70",
-                "label": "Layout 30% 70%"
-              },
-              {
-                "name": "layout-50-50",
-                "label": "Layout 50% 50%"
-              },
-              {
-                "name": "layout-70-30",
-                "label": "Layout 70% 30%"
-              }
-            ]
-        },
-        {
-            "component": "select",
-            "name": "classes",
-            "label": "1 column layout",
-            "condition": {
-                    "===": [{
-                    "var": "columns"
-                    }, "1"]
-            },
-            "options": [
-              {
-                "name": "full",
-                "label": "full"
-              },
-              {
-                "name": "half",
-                "label": "half"
-              },
-              {
-                "name": "third",
-                "label": "third"
-              }
-            ]
+          "component": "select",
+          "valueType": "string",
+          "name": "classes",
+          "label": "Layout",
+          "value": "",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "Layout 30% / 70%", "value": "layout-30-70" },
+            { "name": "Layout 50% / 50%", "value": "layout-50-50" },
+            { "name": "Layout 70% / 30%", "value": "layout-70-30" },
+            { "name": "Full", "value": "full" },
+            { "name": "Half", "value": "half" },
+            { "name": "Third", "value": "third" }
+          ]
         }
       ]
     }
