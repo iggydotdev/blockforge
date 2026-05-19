@@ -36,7 +36,6 @@ async function decorateNestedBlocks(block) {
 }
 
 export default async function decorate(block) {
-
   const firstRow = block.firstElementChild;
   if (firstRow) {
     const cols = [...firstRow.children];
