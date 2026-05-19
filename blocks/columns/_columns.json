@@ -32,7 +32,7 @@
         },
         {
             "component": "select",
-            "name": "2colslayout",
+            "name": "cols-2",
             "label": "2 columns layout",
             "condition": {
                     "===": [{
@@ -57,7 +57,7 @@
         },
         {
             "component": "select",
-            "name": "1collayout",
+            "name": "cols-1",
             "label": "1 column layout",
             "condition": {
                     "===": [{
