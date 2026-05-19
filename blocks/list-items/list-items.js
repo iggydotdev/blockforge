@@ -60,7 +60,7 @@ export default async function decorate(block) {
     }
 
     if (content) {
-      const wrapper = document.createElement('span');
+      const wrapper = document.createElement('div');
       wrapper.classList.add('list-item-content');
       wrapper.append(...content.childNodes);
       li.appendChild(wrapper);

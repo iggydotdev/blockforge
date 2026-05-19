@@ -989,7 +989,7 @@
     "id": "list-item",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
         "name": "text",
         "label": "List Item Text"
