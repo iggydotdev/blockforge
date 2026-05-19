@@ -4,34 +4,52 @@ import { inlineSVGs } from '../../scripts/scripts.js';
 const ORDERED_STYLES = ['decimal', 'upper-roman', 'upper-alpha', 'lower-alpha'];
 const ICON_NAMES = ['checkmark', 'right-arrow', 'star', 'circle', 'square'];
 
+/**
+ * Separate block-level setting rows from list-item content rows.
+ * UE row-per-field: the container model has 3 fields (listType, orderedStyle, icon),
+ * so the first 3 rows are always settings. Remaining rows are authored items.
+ */
+function parseRows(block) {
+  const allRows = [...block.children];
+  const settings = {};
+
+  // The container model defines 3 fields — consume those rows as settings.
+  const settingsCount = 3;
+  const settingRows = allRows.slice(0, settingsCount);
+  const items = allRows.slice(settingsCount);
+
+  settingRows.forEach((row) => {
+    const text = row.textContent.trim().toLowerCase();
+    if (text === 'ordered' || text === 'unordered') {
+      settings.listType = text;
+    } else if (ORDERED_STYLES.includes(text)) {
+      settings.orderedStyle = text;
+    } else if (ICON_NAMES.includes(text)) {
+      settings.icon = text;
+    }
+    row.remove();
+  });
+
+  return { settings, items };
+}
+
 export default async function decorate(block) {
-  const rows = [...block.children];
+  const { settings, items } = parseRows(block);
 
-  // First row holds block-level settings (listType, orderedStyle, icon)
-  const settingsRow = rows[0];
-  const settingCells = settingsRow ? [...settingsRow.children] : [];
-  const listType = settingCells[0]?.textContent?.trim().toLowerCase() || 'unordered';
-  const variant = settingCells[1]?.textContent?.trim().toLowerCase() || '';
-  settingsRow?.remove();
-
-  const isOrdered = listType === 'ordered';
+  const isOrdered = settings.listType === 'ordered';
   const list = document.createElement(isOrdered ? 'ol' : 'ul');
   list.classList.add('list-items-list');
 
-  // Apply ordered list style
-  if (isOrdered && ORDERED_STYLES.includes(variant)) {
-    list.style.listStyleType = variant;
+  if (isOrdered && settings.orderedStyle) {
+    list.style.listStyleType = settings.orderedStyle;
   }
 
-  // Determine icon for unordered lists
-  const iconName = !isOrdered && ICON_NAMES.includes(variant) ? variant : '';
+  const iconName = !isOrdered && settings.icon ? settings.icon : '';
   if (iconName) {
     block.classList.add('list-items-icons');
   }
 
-  // Remaining rows are list items
-  const itemRows = [...block.children];
-  itemRows.forEach((row) => {
+  items.forEach((row) => {
     const li = document.createElement('li');
     const content = row.querySelector('div');
 
