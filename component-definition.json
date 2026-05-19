@@ -290,20 +290,6 @@
           }
         },
         {
-          "title": "Column",
-          "id": "column",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/item",
-                "template": {
-                  "name": "Column"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Content Block",
           "id": "content-block",
           "plugins": {
