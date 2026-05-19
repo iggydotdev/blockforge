@@ -66,17 +66,27 @@
   flex: 0 0 30%;
 }
 
-/* 1-column layout variants */
+/* item-width layout variants — control each item's width, rows wrap */
 .columns.full > div {
-  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.columns.full > div > div {
+  flex: 0 0 100%;
 }
 
 .columns.half > div {
-  max-width: 50%;
-  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.columns.half > div > div {
+  flex: 0 0 calc(50% - 12px);
 }
 
 .columns.third > div {
-  max-width: 33.333%;
-  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.columns.third > div > div {
+  flex: 0 0 calc(33.333% - 16px);
 }
