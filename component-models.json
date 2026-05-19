@@ -991,7 +991,7 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "text",
+        "name": "litsItemText",
         "label": "List Item Text"
       }
     ]

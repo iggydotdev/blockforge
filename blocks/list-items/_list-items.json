@@ -123,8 +123,8 @@
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "text",
-          "label": "List Item Text"
+          "name": "litsItemText",
+          "label": "List Item Text"    
         }
       ]
     }
