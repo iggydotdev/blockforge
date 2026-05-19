@@ -49,7 +49,7 @@ export default async function decorate(block) {
     block.classList.add('list-items-icons');
   }
 
-  items.forEach((row) => {
+  items.forEach((row, index) => {
     const li = document.createElement('li');
     const content = row.querySelector('div');
 
@@ -61,7 +61,7 @@ export default async function decorate(block) {
 
     if (content) {
       const wrapper = document.createElement('div');
-      wrapper.classList.add('list-item-content');
+      wrapper.classList.add('list-item-content', `list-item-content-${index}`);
       wrapper.append(...content.childNodes);
       li.appendChild(wrapper);
     }
