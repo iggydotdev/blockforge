@@ -1,5 +1,5 @@
 import { decorateIcons } from '../../scripts/aem.js';
-import { inlineSVGs } from '../../scripts/scripts.js';
+import { inlineSVGs, moveInstrumentation } from '../../scripts/scripts.js';
 
 const ORDERED_STYLES = ['decimal', 'upper-roman', 'upper-alpha', 'lower-alpha'];
 const ICON_NAMES = ['checkmark', 'right-arrow', 'star', 'circle', 'square'];
@@ -51,7 +51,7 @@ export default async function decorate(block) {
 
   items.forEach((row, index) => {
     const li = document.createElement('li');
-    const content = row.querySelector('div');
+    moveInstrumentation(row, li);
 
     if (iconName) {
       const iconSpan = document.createElement('span');
@@ -59,10 +59,12 @@ export default async function decorate(block) {
       li.appendChild(iconSpan);
     }
 
+    const content = row.querySelector(':scope > div');
     if (content) {
       const wrapper = document.createElement('div');
-      wrapper.classList.add('list-item-content', `list-item-content-${index}`);
-      wrapper.append(...content.childNodes);
+      wrapper.classList.add(`list-item-content list-item-${index + 1}`);
+      moveInstrumentation(content, wrapper);
+      while (content.firstChild) wrapper.append(content.firstChild);
       li.appendChild(wrapper);
     }
 
