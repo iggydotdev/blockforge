@@ -1,0 +1,140 @@
+{
+  "definitions": [
+    {
+      "title": "List Items",
+      "id": "list-items",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "List Items",
+              "model": "list-items",
+              "filter": "list-items"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "List Item",
+      "id": "list-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "List Item",
+              "model": "list-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "list-items",
+      "fields": [
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "listType",
+          "label": "List Type",
+          "value": "unordered",
+          "options": [
+            {
+              "name": "Unordered",
+              "value": "unordered"
+            },
+            {
+              "name": "Ordered",
+              "value": "ordered"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "orderedStyle",
+          "label": "Ordered Style",
+          "condition": {
+            "===": [{ "var": "listType" }, "ordered"]
+          },
+          "options": [
+            {
+              "name": "Numerical (1, 2, 3)",
+              "value": "decimal"
+            },
+            {
+              "name": "Upper Roman (I, II, III)",
+              "value": "upper-roman"
+            },
+            {
+              "name": "Alphabetical (A, B, C)",
+              "value": "upper-alpha"
+            },
+            {
+              "name": "Lower Alphabetical (a, b, c)",
+              "value": "lower-alpha"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "icon",
+          "label": "Bullet Icon",
+          "condition": {
+            "===": [{ "var": "listType" }, "unordered"]
+          },
+          "options": [
+            {
+              "name": "Default bullet",
+              "value": ""
+            },
+            {
+              "name": "Checkmark",
+              "value": "checkmark"
+            },
+            {
+              "name": "Arrow Right",
+              "value": "right-arrow"
+            },
+            {
+              "name": "Star",
+              "value": "star"
+            },
+            {
+              "name": "Circle",
+              "value": "circle"
+            },
+            {
+              "name": "Square",
+              "value": "square"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "list-item",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "text",
+          "label": "List Item Text",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "list-items",
+      "components": [
+        "list-item"
+      ]
+    }
+  ]
+}

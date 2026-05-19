@@ -892,6 +892,111 @@
     ]
   },
   {
+    "id": "list-items",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "listType",
+        "label": "List Type",
+        "value": "unordered",
+        "options": [
+          {
+            "name": "Unordered",
+            "value": "unordered"
+          },
+          {
+            "name": "Ordered",
+            "value": "ordered"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "orderedStyle",
+        "label": "Ordered Style",
+        "condition": {
+          "===": [
+            {
+              "var": "listType"
+            },
+            "ordered"
+          ]
+        },
+        "options": [
+          {
+            "name": "Numerical (1, 2, 3)",
+            "value": "decimal"
+          },
+          {
+            "name": "Upper Roman (I, II, III)",
+            "value": "upper-roman"
+          },
+          {
+            "name": "Alphabetical (A, B, C)",
+            "value": "upper-alpha"
+          },
+          {
+            "name": "Lower Alphabetical (a, b, c)",
+            "value": "lower-alpha"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Bullet Icon",
+        "condition": {
+          "===": [
+            {
+              "var": "listType"
+            },
+            "unordered"
+          ]
+        },
+        "options": [
+          {
+            "name": "Default bullet",
+            "value": ""
+          },
+          {
+            "name": "Checkmark",
+            "value": "checkmark"
+          },
+          {
+            "name": "Arrow Right",
+            "value": "right-arrow"
+          },
+          {
+            "name": "Star",
+            "value": "star"
+          },
+          {
+            "name": "Circle",
+            "value": "circle"
+          },
+          {
+            "name": "Square",
+            "value": "square"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "list-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "List Item Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "product-card",
     "fields": [
       {

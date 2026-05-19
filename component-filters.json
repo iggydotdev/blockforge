@@ -29,6 +29,7 @@
       "html",
       "icard",
       "image",
+      "list-items",
       "product-cards",
       "promo-banner",
       "quote",
@@ -180,6 +181,12 @@
     "id": "hero-carousel",
     "components": [
       "hero-slide"
+    ]
+  },
+  {
+    "id": "list-items",
+    "components": [
+      "list-item"
     ]
   },
   {
