@@ -989,10 +989,11 @@
     "id": "list-item",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
-        "name": "content",
-        "label": "List Item Text",
+        "name": "listItemTextContent",
+        "label": "List item content",
+        "description": "The text content of the list item. Supports rich text formatting.",
         "value": ""
       }
     ]
