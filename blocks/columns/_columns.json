@@ -42,15 +42,15 @@
             "options": [
               
               {
-                "value": "layout-30-70",
+                "name": "layout-30-70",
                 "label": "Layout 30% 70%"
               },
               {
-                "value": "layout-50-50",
+                "name": "layout-50-50",
                 "label": "Layout 50% 50%"
               },
               {
-                "value": "layout-70-30",
+                "name": "layout-70-30",
                 "label": "Layout 70% 30%"
               }
             ]
@@ -66,15 +66,15 @@
             },
             "options": [
               {
-                "value": "full",
+                "name": "full",
                 "label": "full"
               },
               {
-                "value": "half",
+                "name": "half",
                 "label": "half"
               },
               {
-                "value": "third",
+                "name": "third",
                 "label": "third"
               }
             ]
