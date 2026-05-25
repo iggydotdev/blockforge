@@ -135,7 +135,13 @@
     {
       "id": "list-items",
       "components": [
-        "list-item",
+        "list-item"
+      ]
+    },
+    {
+      "id":"list-item",
+      "components": [
+        "richtext",
         "text",
         "title"
       ]
