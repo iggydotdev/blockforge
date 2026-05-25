@@ -1,7 +1,7 @@
 ---
 description: "Use when: reading Figma designs, extracting design specs, tokens, layout, typography, or component structure from a Figma URL or file key"
-tools: [figma-developer/*]
-user-invocable: false
+tools: [figma/*, figma-console/*]
+user-invocable: true
 disable-model-invocation: false
 ---
 

@@ -186,7 +186,9 @@
   {
     "id": "list-items",
     "components": [
-      "list-item"
+      "list-item",
+      "text",
+      "title"
     ]
   },
   {

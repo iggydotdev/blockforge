@@ -1,7 +1,7 @@
 ---
 description: "Use when: reading Jira tickets, fetching requirements, updating ticket status, posting comments, searching issues, or interacting with Confluence via Atlassian"
 tools: [atlassian/*]
-user-invocable: false
+user-invocable: true
 disable-model-invocation: false
 ---
 
