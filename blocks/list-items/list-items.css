@@ -38,8 +38,23 @@
   height: 100%;
 }
 
+/* Ordered list style variants (driven by class on the block) */
+.list-items.ordered.decimal .list-items-list {
+  list-style-type: decimal;
+}
+
+.list-items.ordered.upper-roman .list-items-list {
+  list-style-type: upper-roman;
+}
+
+.list-items.ordered.upper-alpha .list-items-list {
+  list-style-type: upper-alpha;
+}
+
+.list-items.ordered.lower-alpha .list-items-list {
+  list-style-type: lower-alpha;
+}
+
 .list-items .list-item-content {
   flex: 1;
 }
-
-/* Ordered list variants are handled via inline style (list-style-type) */

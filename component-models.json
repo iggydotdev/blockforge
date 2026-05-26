@@ -897,7 +897,7 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "listVariant",
+        "name": "variant",
         "label": "List Type",
         "value": "unordered",
         "options": [
@@ -914,12 +914,13 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "orderedStyle",
-        "label": "Ordered Style",
+        "name": "listStyleOrdered",
+        "label": "Style",
+        "value": "decimal",
         "condition": {
           "===": [
             {
-              "var": "listVariant"
+              "var": "variant"
             },
             "ordered"
           ]
@@ -934,7 +935,7 @@
             "value": "upper-roman"
           },
           {
-            "name": "Alphabetical (A, B, C)",
+            "name": "Upper Alphabetical (A, B, C)",
             "value": "upper-alpha"
           },
           {
@@ -946,12 +947,13 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "icon",
-        "label": "Bullet Icon",
+        "name": "listStyleUnordered",
+        "label": "Style",
+        "value": "",
         "condition": {
           "===": [
             {
-              "var": "listVariant"
+              "var": "variant"
             },
             "unordered"
           ]
