@@ -984,12 +984,103 @@
             "value": "square"
           }
         ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "startValue",
+        "label": "Starting Value",
+        "description": "Sets where the top-level ordered list begins. Accepts a number (e.g. 5), a letter (e.g. C → 3), or a Roman numeral (e.g. III → 3). Ignored for unordered lists.",
+        "value": "",
+        "condition": {
+          "===": [
+            {
+              "var": "variant"
+            },
+            "ordered"
+          ]
+        }
       }
     ]
   },
   {
     "id": "list-item",
     "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "listItemIndent",
+        "label": "Indent Level",
+        "value": "0",
+        "options": [
+          {
+            "name": "Level 1 (top)",
+            "value": "0"
+          },
+          {
+            "name": "Level 2",
+            "value": "1"
+          },
+          {
+            "name": "Level 3",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "listItemNestedStyle",
+        "label": "Nested List Style",
+        "description": "Used only when this item starts a deeper sub-list (its Indent Level is greater than the previous item's). Leave as Inherit to use the parent list's style.",
+        "value": "",
+        "options": [
+          {
+            "name": "Inherit from parent",
+            "value": ""
+          },
+          {
+            "name": "Ordered – Numerical (1, 2, 3)",
+            "value": "ordered-decimal"
+          },
+          {
+            "name": "Ordered – Upper Roman (I, II, III)",
+            "value": "ordered-upper-roman"
+          },
+          {
+            "name": "Ordered – Upper Alpha (A, B, C)",
+            "value": "ordered-upper-alpha"
+          },
+          {
+            "name": "Ordered – Lower Alpha (a, b, c)",
+            "value": "ordered-lower-alpha"
+          },
+          {
+            "name": "Unordered – Default bullet",
+            "value": "unordered-default"
+          },
+          {
+            "name": "Unordered – Checkmark",
+            "value": "unordered-checkmark"
+          },
+          {
+            "name": "Unordered – Arrow Right",
+            "value": "unordered-right-arrow"
+          },
+          {
+            "name": "Unordered – Star",
+            "value": "unordered-star"
+          },
+          {
+            "name": "Unordered – Circle",
+            "value": "unordered-circle"
+          },
+          {
+            "name": "Unordered – Square",
+            "value": "unordered-square"
+          }
+        ]
+      },
       {
         "component": "richtext",
         "valueType": "string",
