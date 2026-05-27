@@ -1,0 +1,119 @@
+<body>
+  <header></header>
+  <main>
+    <div>
+      <h1>List Items — Nested Renderer Test</h1>
+
+      <h2>Test 1 — Ordered with start=5, mixed nesting</h2>
+      <p>Expected: starts at 5; item 6 has an A/B/C sub-list; B has a checkmark sub-sub-list; then back to top-level 7.</p>
+      <div class="list-items">
+        <div><div>ordered</div></div>
+        <div><div>decimal</div></div>
+        <div><div></div></div>
+        <div><div>5</div></div>
+
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>First top-level item (should be 5)</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Second top-level item (6) — has nested A/B/C below</p></div></div>
+        </div>
+        <div>
+          <div><div>1</div></div>
+          <div><div>ordered-upper-alpha</div></div>
+          <div><div><p>Nested A</p></div></div>
+        </div>
+        <div>
+          <div><div>1</div></div>
+          <div><div></div></div>
+          <div><div><p>Nested B — has checkmark sub-list below</p></div></div>
+        </div>
+        <div>
+          <div><div>2</div></div>
+          <div><div>unordered-checkmark</div></div>
+          <div><div><p>Deep checkmark item one</p></div></div>
+        </div>
+        <div>
+          <div><div>2</div></div>
+          <div><div></div></div>
+          <div><div><p>Deep checkmark item two</p></div></div>
+        </div>
+        <div>
+          <div><div>1</div></div>
+          <div><div></div></div>
+          <div><div><p>Nested C (back to alpha)</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Third top-level item (should be 7)</p></div></div>
+        </div>
+      </div>
+
+      <h2>Test 2 — Unordered with right-arrow icons, 2-level nesting</h2>
+      <p>Expected: top-level arrows; second item has a star sub-list.</p>
+      <div class="list-items">
+        <div><div>unordered</div></div>
+        <div><div></div></div>
+        <div><div>right-arrow</div></div>
+        <div><div></div></div>
+
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Arrow item one</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Arrow item two — has star sub-list</p></div></div>
+        </div>
+        <div>
+          <div><div>1</div></div>
+          <div><div>unordered-star</div></div>
+          <div><div><p>Star sub-item alpha</p></div></div>
+        </div>
+        <div>
+          <div><div>1</div></div>
+          <div><div></div></div>
+          <div><div><p>Star sub-item beta</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Arrow item three</p></div></div>
+        </div>
+      </div>
+
+      <h2>Test 3 — Flat ordered (no nesting), default start</h2>
+      <p>Expected: 1, 2, 3 in upper Roman.</p>
+      <div class="list-items">
+        <div><div>ordered</div></div>
+        <div><div>upper-roman</div></div>
+        <div><div></div></div>
+        <div><div></div></div>
+
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>First</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Second</p></div></div>
+        </div>
+        <div>
+          <div><div>0</div></div>
+          <div><div></div></div>
+          <div><div><p>Third</p></div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>

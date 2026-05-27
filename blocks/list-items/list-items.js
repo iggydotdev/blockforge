@@ -280,8 +280,15 @@ function buildTree(items, containerSettings) {
  */
 export default async function decorate(block) {
   const children = [...block.children];
-  const itemEls = children.filter((el) => el.matches('[data-aue-component="list-item"]'));
-  const settingRows = children.filter((el) => !el.matches('[data-aue-component="list-item"]'));
+  // An item row is either explicitly marked by Universal Editor or, in plain
+  // preview/drafts HTML, structurally has more than one direct child div (one
+  // per field). Settings rows have exactly one direct child div.
+  const isItem = (el) => (
+    el.matches('[data-aue-component="list-item"]')
+    || el.querySelectorAll(':scope > div').length > 1
+  );
+  const itemEls = children.filter(isItem);
+  const settingRows = children.filter((el) => !isItem(el));
 
   const settings = parseContainerSettings(settingRows);
   const parsedItems = itemEls.map((el) => ({
