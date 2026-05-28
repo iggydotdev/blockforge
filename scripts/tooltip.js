@@ -61,10 +61,21 @@ function buildTooltip(anchor) {
   const wrapper = document.createElement('span');
   wrapper.className = 'tooltip';
   wrapper.tabIndex = 0;
+  wrapper.setAttribute('role', 'button');
+  wrapper.setAttribute('aria-label', text);
   wrapper.setAttribute('aria-describedby', id);
 
-  // Move the original term content into the wrapper.
-  while (anchor.firstChild) wrapper.appendChild(anchor.firstChild);
+  // The anchor's text content is discarded — the trigger is an icon now,
+  // so what the author typed between the tags doesn't matter. We render a
+  // self-contained inline SVG info glyph (no extra fetch, themable via
+  // currentColor).
+  const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  icon.setAttribute('class', 'tooltip-icon');
+  icon.setAttribute('viewBox', '0 0 16 16');
+  icon.setAttribute('aria-hidden', 'true');
+  icon.setAttribute('focusable', 'false');
+  icon.innerHTML = '<circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="4.5" r="1" fill="currentColor"/><path d="M8 7v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>';
+  wrapper.appendChild(icon);
 
   const bubble = document.createElement('span');
   bubble.className = 'tooltip-content';

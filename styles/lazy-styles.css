@@ -8,16 +8,28 @@
    on touch. */
 .tooltip {
   position: relative;
-  display: inline;
-  border-bottom: 1px dotted currentcolor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  margin: 0 0.15em;
+  color: var(--color-accent, #0057b7);
   cursor: help;
   outline: none;
+}
+
+.tooltip-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .tooltip:focus-visible {
   outline: 2px solid currentcolor;
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 50%;
 }
 
 .tooltip-content {
