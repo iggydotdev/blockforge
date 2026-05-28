@@ -59,6 +59,7 @@
           "options": [
             { "name": "Numerical (1, 2, 3)", "value": "decimal" },
             { "name": "Upper Roman (I, II, III)", "value": "upper-roman" },
+            { "name": "Lower Roman (i, ii, iii)", "value": "lower-roman" },
             { "name": "Upper Alphabetical (A, B, C)", "value": "upper-alpha" },
             { "name": "Lower Alphabetical (a, b, c)", "value": "lower-alpha" }
           ]
@@ -86,7 +87,7 @@
           "valueType": "string",
           "name": "startValue",
           "label": "Starting Value",
-          "description": "Sets where the top-level ordered list begins. Accepts a number (e.g. 5), a letter (e.g. C → 3), or a Roman numeral (e.g. III → 3). Ignored for unordered lists.",
+          "description": "Where the top-level ordered list begins. Accepts a number (5), a letter (C \u2192 3), or a Roman numeral (III \u2192 3). Ignored for unordered lists.",
           "value": "",
           "condition": {
             "===": [{ "var": "variant" }, "ordered"]
@@ -102,6 +103,7 @@
           "valueType": "string",
           "name": "listItemIndent",
           "label": "Indent Level",
+          "description": "How deeply this item is nested. Up to 3 levels are supported.",
           "value": "0",
           "options": [
             { "name": "Level 1 (top)", "value": "0" },
@@ -112,23 +114,60 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "listItemNestedStyle",
-          "label": "Nested List Style",
-          "description": "Used only when this item starts a deeper sub-list (its Indent Level is greater than the previous item's). Leave as Inherit to use the parent list's style.",
+          "name": "listItemNestedVariant",
+          "label": "Sub-list Type",
+          "description": "Only used when this item opens a deeper sub-list (its Indent Level is greater than the previous item's). Leave as Inherit to use the parent list's type.",
           "value": "",
           "options": [
             { "name": "Inherit from parent", "value": "" },
-            { "name": "Ordered – Numerical (1, 2, 3)", "value": "ordered-decimal" },
-            { "name": "Ordered – Upper Roman (I, II, III)", "value": "ordered-upper-roman" },
-            { "name": "Ordered – Upper Alpha (A, B, C)", "value": "ordered-upper-alpha" },
-            { "name": "Ordered – Lower Alpha (a, b, c)", "value": "ordered-lower-alpha" },
-            { "name": "Unordered – Default bullet", "value": "unordered-default" },
-            { "name": "Unordered – Checkmark", "value": "unordered-checkmark" },
-            { "name": "Unordered – Arrow Right", "value": "unordered-right-arrow" },
-            { "name": "Unordered – Star", "value": "unordered-star" },
-            { "name": "Unordered – Circle", "value": "unordered-circle" },
-            { "name": "Unordered – Square", "value": "unordered-square" }
+            { "name": "Ordered", "value": "ordered" },
+            { "name": "Unordered", "value": "unordered" }
           ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "listItemNestedStyleOrdered",
+          "label": "Sub-list Style",
+          "description": "Style for the sub-list this item opens (ordered).",
+          "value": "decimal",
+          "condition": {
+            "===": [{ "var": "listItemNestedVariant" }, "ordered"]
+          },
+          "options": [
+            { "name": "Numerical (1, 2, 3)", "value": "decimal" },
+            { "name": "Upper Roman (I, II, III)", "value": "upper-roman" },
+            { "name": "Lower Roman (i, ii, iii)", "value": "lower-roman" },
+            { "name": "Upper Alphabetical (A, B, C)", "value": "upper-alpha" },
+            { "name": "Lower Alphabetical (a, b, c)", "value": "lower-alpha" }
+          ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "listItemNestedStyleUnordered",
+          "label": "Sub-list Style",
+          "description": "Style for the sub-list this item opens (unordered).",
+          "value": "",
+          "condition": {
+            "===": [{ "var": "listItemNestedVariant" }, "unordered"]
+          },
+          "options": [
+            { "name": "Default bullet", "value": "" },
+            { "name": "Checkmark", "value": "checkmark" },
+            { "name": "Arrow Right", "value": "right-arrow" },
+            { "name": "Star", "value": "star" },
+            { "name": "Circle", "value": "circle" },
+            { "name": "Square", "value": "square" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "listItemStartValue",
+          "label": "Restart Numbering At",
+          "description": "Optional. Restarts numbering at this value on the surrounding ordered list. Accepts a number (5), a letter (C \u2192 3), or a Roman numeral (III \u2192 3). Ignored when the surrounding list is unordered.",
+          "value": ""
         },
         {
           "component": "richtext",

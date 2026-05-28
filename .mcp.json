@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp/authv2",
+      "headers": {
+        "Authorization": "${ATLASSIAN_TOKEN}"
+      }
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    },
+
+    "figma-local":{
+      "type": "http",
+      "url": "https://127.0.0.1:3845/mcp"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "figma-console": {
+      "command": "npx",
+      "args": ["-y", "figma-console-mcp@latest"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "${FIGMA_CONSOLE_TOKEN}",
+        "ENABLE_MCP_APPS": "true"
+      }
+    }
+  }
+}

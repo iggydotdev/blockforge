@@ -55,12 +55,21 @@
   list-style-type: upper-roman;
 }
 
+.list-items ol.lower-roman {
+  list-style-type: lower-roman;
+}
+
 .list-items ol.upper-alpha {
   list-style-type: upper-alpha;
 }
 
 .list-items ol.lower-alpha {
   list-style-type: lower-alpha;
+}
+
+/* Sibling lists produced by per-item start restarts share the parent's gap. */
+.list-items .list-items-list + .list-items-list {
+  margin-top: var(--spacing-8, 8px);
 }
 
 .list-items .list-item-content {

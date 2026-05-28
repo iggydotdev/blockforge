@@ -5,6 +5,7 @@ const LIST_TYPES = new Set(['ordered', 'unordered']);
 const ORDERED_STYLES = new Set([
   'decimal',
   'upper-roman',
+  'lower-roman',
   'upper-alpha',
   'lower-alpha',
 ]);
@@ -16,25 +17,13 @@ const ICON_STYLES = new Set([
   'square',
 ]);
 const INDENT_TOKENS = new Set(['0', '1', '2']);
-const NESTED_STYLE_TOKENS = new Set([
-  'ordered-decimal',
-  'ordered-upper-roman',
-  'ordered-upper-alpha',
-  'ordered-lower-alpha',
-  'unordered-default',
-  'unordered-checkmark',
-  'unordered-right-arrow',
-  'unordered-star',
-  'unordered-circle',
-  'unordered-square',
-]);
 const MAX_DEPTH = 2;
 const ROMAN_VALUES = {
   I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000,
 };
 
 /**
- * Convert a Roman numeral string (already uppercased) to an integer.
+ * Convert a Roman numeral string (already uppercased) to a positive integer.
  * Returns null if the input is not a valid Roman numeral.
  * @param {string} s
  * @returns {number|null}
@@ -60,7 +49,7 @@ function romanToInt(s) {
  */
 function parseStart(input) {
   if (!input) return null;
-  const s = input.trim();
+  const s = String(input).trim();
   if (!s) return null;
   if (/^\d+$/.test(s)) {
     const n = parseInt(s, 10);
@@ -76,43 +65,31 @@ function parseStart(input) {
 }
 
 /**
- * Split a nested-style token like "ordered-upper-roman" into
- * { variant, style }. "unordered-default" maps to { unordered, "" }.
- * Returns null if the token isn't recognised.
- * @param {string} token
- */
-function splitNestedStyle(token) {
-  if (!token || !NESTED_STYLE_TOKENS.has(token)) return null;
-  if (token === 'unordered-default') return { variant: 'unordered', style: '' };
-  if (token.startsWith('ordered-')) {
-    return { variant: 'ordered', style: token.slice('ordered-'.length) };
-  }
-  if (token.startsWith('unordered-')) {
-    return { variant: 'unordered', style: token.slice('unordered-'.length) };
-  }
-  return null;
-}
-
-/**
  * Read container settings from the rows that precede the list-item children.
- * Tokens are matched against known value sets so the parser is tolerant of
- * conditional fields producing 1, 2, or more settings rows.
+ * Prefers Universal Editor data-aue-prop attributes; falls back to matching
+ * cell text against known token sets for preview/drafts HTML.
  * @param {Element[]} settingRows
+ * @returns {{ variant: string, listStyle: string, startValue: string }}
  */
 function parseContainerSettings(settingRows) {
   const settings = { variant: 'unordered', listStyle: '', startValue: '' };
   settingRows.forEach((row) => {
     row.querySelectorAll(':scope > div').forEach((cell) => {
+      const prop = cell.getAttribute('data-aue-prop');
       const raw = cell.textContent.trim();
-      if (!raw) return;
-      const token = raw.toLowerCase();
-      if (LIST_TYPES.has(token)) {
-        settings.variant = token;
-      } else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) {
-        settings.listStyle = token;
-      } else if (!settings.startValue) {
-        // Unknown token → treat as the free-form start value.
+      if (prop === 'variant') {
+        if (LIST_TYPES.has(raw)) settings.variant = raw;
+      } else if (prop === 'listStyleOrdered' || prop === 'listStyleUnordered') {
+        if (raw) settings.listStyle = raw;
+      } else if (prop === 'startValue') {
         settings.startValue = raw;
+      } else if (!prop) {
+        // Legacy/preview HTML: fall back to token matching.
+        if (!raw) return;
+        const token = raw.toLowerCase();
+        if (LIST_TYPES.has(token)) settings.variant = token;
+        else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) settings.listStyle = token;
+        else if (!settings.startValue) settings.startValue = raw;
       }
     });
     row.remove();
@@ -122,15 +99,13 @@ function parseContainerSettings(settingRows) {
 
 /**
  * Resolve the effective cell element for an item child. In Universal Editor
- * rendering, the item's direct children ARE the field cells. In the legacy
- * drafts test format, each field is wrapped in an extra <div>, so the cell is
- * one level deeper. This shim handles both shapes.
+ * rendering the item's direct children ARE the field cells. In the legacy
+ * preview/drafts shape each field is wrapped in an extra div, so the real
+ * cell is one level deeper.
  * @param {Element} child
  * @returns {Element}
  */
 function resolveCell(child) {
-  // Legacy drafts shape: a wrapper <div> whose only child is the real cell
-  // and which carries no text content of its own.
   if (
     child.children.length === 1
     && child.firstElementChild.tagName === 'DIV'
@@ -147,12 +122,10 @@ function resolveCell(child) {
 }
 
 /**
- * Read indent + nestedStyle settings from a list-item. Each item child is a
- * field cell (UE) or a wrapper around a cell (legacy drafts). The content cell
- * is identified by [data-aue-prop="listItemTextContent"] when present, with a
- * positional fallback (last cell) for preview/drafts without UE attributes.
+ * Parse a single list-item element into its settings + content cell.
+ * Uses data-aue-prop where available; otherwise matches cell text against
+ * known token sets so the parser works in preview/drafts too.
  * @param {Element} itemEl
- * @returns {{ indent: number, nestedStyle: string, contentRow: Element|null }}
  */
 function parseItem(itemEl) {
   const cells = [...itemEl.children].map(resolveCell);
@@ -162,7 +135,7 @@ function parseItem(itemEl) {
   cells.forEach((cell) => {
     if (
       cell.matches('[data-aue-prop="listItemTextContent"]')
-      || cell.querySelector('[data-aue-prop="listItemTextContent"]')
+      || cell.querySelector(':scope > [data-aue-prop="listItemTextContent"]')
     ) {
       contentRow = cell;
     } else {
@@ -170,8 +143,7 @@ function parseItem(itemEl) {
     }
   });
 
-  // Fallback: if no content marker was found (e.g. preview without UE
-  // attributes), assume the last cell is the content cell.
+  // Fallback when no UE marker: assume the last cell carries the content.
   if (!contentRow && cells.length) {
     contentRow = cells[cells.length - 1];
     const idx = settingCells.indexOf(contentRow);
@@ -179,29 +151,71 @@ function parseItem(itemEl) {
   }
 
   let indent = 0;
+  let nestedVariant = '';
   let nestedStyle = '';
+  let startValue = '';
+
   settingCells.forEach((cell) => {
-    const token = cell.textContent.trim().toLowerCase();
-    if (!token) return;
-    if (INDENT_TOKENS.has(token)) indent = parseInt(token, 10);
-    else if (NESTED_STYLE_TOKENS.has(token)) nestedStyle = token;
+    const prop = cell.getAttribute('data-aue-prop');
+    const raw = cell.textContent.trim();
+    if (prop === 'listItemIndent') {
+      if (INDENT_TOKENS.has(raw)) indent = parseInt(raw, 10);
+    } else if (prop === 'listItemNestedVariant') {
+      if (LIST_TYPES.has(raw)) nestedVariant = raw;
+    } else if (prop === 'listItemNestedStyleOrdered') {
+      if (ORDERED_STYLES.has(raw)) nestedStyle = raw;
+    } else if (prop === 'listItemNestedStyleUnordered') {
+      if (!raw || ICON_STYLES.has(raw)) nestedStyle = raw;
+    } else if (prop === 'listItemStartValue') {
+      startValue = raw;
+    } else if (!prop) {
+      // Legacy/preview HTML: fall back to token matching.
+      if (!raw) return;
+      const token = raw.toLowerCase();
+      if (INDENT_TOKENS.has(token)) indent = parseInt(token, 10);
+      else if (LIST_TYPES.has(token)) nestedVariant = token;
+      else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) nestedStyle = token;
+      else if (!startValue) startValue = raw;
+    }
   });
 
-  return { indent, nestedStyle, contentRow };
+  return {
+    indent, nestedVariant, nestedStyle, startValue, contentRow,
+  };
+}
+
+/**
+ * Resolve the variant + style of a sub-list this item opens. Falls back to
+ * the parent's variant/style when the author leaves Inherit.
+ * @param {{ nestedVariant: string, nestedStyle: string }} item
+ * @param {{ variant: string, style: string }} parent
+ */
+function resolveNestedStyle(item, parent) {
+  if (!item.nestedVariant) {
+    return { variant: parent.variant, style: parent.style };
+  }
+  if (item.nestedVariant === 'ordered') {
+    const style = ORDERED_STYLES.has(item.nestedStyle) ? item.nestedStyle : 'decimal';
+    return { variant: 'ordered', style };
+  }
+  // Unordered: allow icon styles or empty (default bullet).
+  const style = ICON_STYLES.has(item.nestedStyle) ? item.nestedStyle : '';
+  return { variant: 'unordered', style };
 }
 
 /**
  * Create an <ol> or <ul> for the given variant + style. Applies style classes
- * directly on the list element so nested sub-lists can carry their own style.
+ * on the list itself so nested or sibling lists can override.
  * @param {string} variant
  * @param {string} style
  */
 function createList(variant, style) {
   const list = document.createElement(variant === 'ordered' ? 'ol' : 'ul');
   list.classList.add('list-items-list');
-  if (style) {
+  if (variant === 'unordered' && ICON_STYLES.has(style)) {
+    list.classList.add(style, 'list-items-icons');
+  } else if (variant === 'ordered' && ORDERED_STYLES.has(style)) {
     list.classList.add(style);
-    if (ICON_STYLES.has(style)) list.classList.add('list-items-icons');
   }
   return list;
 }
@@ -238,54 +252,54 @@ function buildLi(item, originalRow, currentList, index) {
 }
 
 /**
- * Build the (possibly nested) list tree from parsed items.
- * @param {Array} items   Array of { indent, nestedStyle, contentRow, originalRow }
+ * Build the (possibly nested) list tree from parsed items into the given
+ * root element which must already be attached to `block`.
+ * @param {Array} items   Parsed items
+ *   { indent, nestedVariant, nestedStyle, startValue, contentRow, originalRow }
  * @param {{ variant: string, listStyle: string }} containerSettings
- * @returns {{ root: Element, hasIcons: boolean }}
+ * @param {Element} root  The top-level <ol>/<ul>, already attached to block
+ * @param {Element} block The block element (sibling-split anchor at depth 0)
+ * @returns {{ hasIcons: boolean }}
  */
-function buildTree(items, containerSettings) {
-  const root = createList(containerSettings.variant, containerSettings.listStyle);
+function buildTree(items, containerSettings, root, block) {
+  let hasIcons = ICON_STYLES.has(containerSettings.listStyle)
+    && containerSettings.variant === 'unordered';
   const stack = [{
     list: root,
+    parent: block,
     depth: 0,
     variant: containerSettings.variant,
     style: containerSettings.listStyle,
     count: 0,
   }];
-  let hasIcons = ICON_STYLES.has(containerSettings.listStyle);
 
-  items.forEach(({
-    indent, nestedStyle, contentRow, originalRow,
-  }) => {
+  items.forEach((item) => {
     // Clamp indent: cannot jump more than one level deeper than current top
     // and never exceeds MAX_DEPTH.
     const top = stack[stack.length - 1];
-    const target = Math.min(Math.max(0, indent), Math.min(MAX_DEPTH, top.depth + 1));
+    const target = Math.min(Math.max(0, item.indent), Math.min(MAX_DEPTH, top.depth + 1));
 
-    // Close levels that are deeper than target.
+    // Close levels that are deeper than the target depth.
     while (stack.length > 1 && stack[stack.length - 1].depth > target) {
       stack.pop();
     }
 
-    // Open a new sub-list when target is deeper than current top.
+    // Open a deeper sub-list when needed.
     if (target > stack[stack.length - 1].depth) {
-      const parent = stack[stack.length - 1];
-      const parentLi = parent.list.lastElementChild;
-      // If parent list has no <li> yet (author began with an indented item),
-      // synthesize an empty <li> so the sub-list has somewhere to attach.
-      const attachTo = parentLi || (() => {
+      const parentFrame = stack[stack.length - 1];
+      const parentLi = parentFrame.list.lastElementChild || (() => {
         const placeholder = document.createElement('li');
-        parent.list.appendChild(placeholder);
-        parent.count += 1;
+        parentFrame.list.appendChild(placeholder);
+        parentFrame.count += 1;
         return placeholder;
       })();
-      const resolved = splitNestedStyle(nestedStyle)
-        || { variant: parent.variant, style: parent.style };
+      const resolved = resolveNestedStyle(item, parentFrame);
       const subList = createList(resolved.variant, resolved.style);
-      attachTo.appendChild(subList);
-      if (ICON_STYLES.has(resolved.style)) hasIcons = true;
+      parentLi.appendChild(subList);
+      if (resolved.variant === 'unordered' && ICON_STYLES.has(resolved.style)) hasIcons = true;
       stack.push({
         list: subList,
+        parent: parentLi,
         depth: target,
         variant: resolved.variant,
         style: resolved.style,
@@ -293,13 +307,30 @@ function buildTree(items, containerSettings) {
       });
     }
 
+    // Per-item restart for ordered lists: set start on the current list when
+    // we're at its first child, otherwise split into a sibling <ol start="N">.
     const current = stack[stack.length - 1];
+    if (current.variant === 'ordered' && item.startValue) {
+      const start = parseStart(item.startValue);
+      if (start !== null) {
+        if (current.count === 0) {
+          current.list.setAttribute('start', String(start));
+        } else {
+          const sibling = createList(current.variant, current.style);
+          sibling.setAttribute('start', String(start));
+          current.parent.appendChild(sibling);
+          current.list = sibling;
+          current.count = 0;
+        }
+      }
+    }
+
     current.count += 1;
-    const li = buildLi({ contentRow }, originalRow, current, current.count);
+    const li = buildLi(item, item.originalRow, current, current.count);
     current.list.appendChild(li);
   });
 
-  return { root, hasIcons };
+  return { hasIcons };
 }
 
 /**
@@ -324,22 +355,25 @@ export default async function decorate(block) {
     originalRow: el,
   }));
 
-  // Apply variant/style classes onto the block itself so it can be targeted in
-  // CSS independently of any nested list classes.
+  // Apply variant/style classes onto the block so it can be targeted in CSS
+  // independently of nested list classes.
   block.classList.add(settings.variant);
   if (settings.listStyle) block.classList.add(settings.listStyle);
-  if (ICON_STYLES.has(settings.listStyle)) block.classList.add('list-items-icons');
+  if (settings.variant === 'unordered' && ICON_STYLES.has(settings.listStyle)) {
+    block.classList.add('list-items-icons');
+  }
 
-  const { root, hasIcons } = buildTree(parsedItems, settings);
-
-  // Apply start attribute on the top-level ordered list when provided.
+  block.textContent = '';
+  const root = createList(settings.variant, settings.listStyle);
+  // Apply top-level start before building so per-item restarts can override
+  // by splitting into sibling lists if needed.
   if (settings.variant === 'ordered') {
     const start = parseStart(settings.startValue);
     if (start !== null) root.setAttribute('start', String(start));
   }
-
-  block.textContent = '';
   block.appendChild(root);
+
+  const { hasIcons } = buildTree(parsedItems, settings, root, block);
 
   if (hasIcons) {
     decorateIcons(block);
