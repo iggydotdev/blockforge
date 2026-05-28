@@ -158,21 +158,31 @@ function parseItem(itemEl) {
   settingCells.forEach((cell) => {
     const prop = cell.getAttribute('data-aue-prop');
     const raw = cell.textContent.trim();
+    let matched = false;
     if (prop === 'listItemIndent') {
       if (INDENT_TOKENS.has(raw)) indent = parseInt(raw, 10);
+      matched = true;
     } else if (prop === 'listItemNestedVariant') {
       if (LIST_TYPES.has(raw)) nestedVariant = raw;
-    } else if (prop === 'listItemNestedStyleOrdered') {
-      if (ORDERED_STYLES.has(raw)) nestedStyle = raw;
-    } else if (prop === 'listItemNestedStyleUnordered') {
-      if (!raw || ICON_STYLES.has(raw)) nestedStyle = raw;
+      matched = true;
+    } else if (
+      prop === 'listItemNestedStyleOrdered'
+      || prop === 'listItemNestedStyleUnordered'
+      // Legacy single-field name from before the ordered/unordered split.
+      || prop === 'listItemNestedStyle'
+    ) {
+      if (ORDERED_STYLES.has(raw) || ICON_STYLES.has(raw)) nestedStyle = raw;
+      matched = true;
     } else if (prop === 'listItemStartValue') {
       startValue = raw;
-    } else if (!prop) {
-      // Legacy/preview HTML: fall back to token matching.
-      if (!raw) return;
+      matched = true;
+    }
+    // For unknown / missing data-aue-prop, fall back to token matching against
+    // the cell text so legacy property names and drafts/preview HTML still
+    // resolve to the correct setting.
+    if (!matched && raw) {
       const token = raw.toLowerCase();
-      if (INDENT_TOKENS.has(token)) indent = parseInt(token, 10);
+      if (INDENT_TOKENS.has(token) && indent === 0) indent = parseInt(token, 10);
       else if (LIST_TYPES.has(token)) nestedVariant = token;
       else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) nestedStyle = token;
       else if (!startValue) startValue = raw;
