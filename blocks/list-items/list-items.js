@@ -147,6 +147,10 @@ function findFieldEl(root, selector) {
  * @param {Element} itemEl
  */
 function parseItem(itemEl) {
+  // TEMP DEBUG — remove after diagnosis.
+  // eslint-disable-next-line no-console
+  console.log('[list-items DEBUG] itemEl.outerHTML:', itemEl.outerHTML);
+
   let contentRow = null;
   let indent = 0;
   let nestedVariant = '';
