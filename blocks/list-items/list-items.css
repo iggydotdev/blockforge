@@ -76,7 +76,8 @@
   list-style-type: lower-alpha;
 }
 
-/* Sibling lists produced by per-item start restarts share the parent's gap. */
+/* Sibling lists produced by per-item start restarts share the parent's gap.
+   stylelint-disable-next-line no-descending-specificity */
 .list-items .list-items-list + .list-items-list {
   margin-top: var(--spacing-8, 8px);
 }
