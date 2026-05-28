@@ -122,72 +122,89 @@ function resolveCell(child) {
 }
 
 /**
+ * Find the nearest element matching `selector` within `root` that does NOT
+ * live inside a nested list-item. UE may wrap individual field cells in
+ * extra divs so we cannot assume the field is a direct child.
+ * @param {Element} root
+ * @param {string} selector
+ * @returns {Element|null}
+ */
+function findFieldEl(root, selector) {
+  const matches = root.querySelectorAll(selector);
+  for (let i = 0; i < matches.length; i += 1) {
+    const el = matches[i];
+    if (el.closest('[data-aue-component="list-item"]') === root) return el;
+  }
+  // Fallback: first match regardless (root might not have the marker yet).
+  return matches[0] || null;
+}
+
+/**
  * Parse a single list-item element into its settings + content cell.
- * Uses data-aue-prop where available; otherwise matches cell text against
- * known token sets so the parser works in preview/drafts too.
+ * Reads field cells by `data-aue-prop` ANYWHERE inside the item (UE may wrap
+ * individual fields in extra divs). Falls back to positional token matching
+ * when no UE markers are present (drafts/preview HTML).
  * @param {Element} itemEl
  */
 function parseItem(itemEl) {
-  const cells = [...itemEl.children].map(resolveCell);
   let contentRow = null;
-  const settingCells = [];
-
-  cells.forEach((cell) => {
-    if (
-      cell.matches('[data-aue-prop="listItemTextContent"]')
-      || cell.querySelector(':scope > [data-aue-prop="listItemTextContent"]')
-    ) {
-      contentRow = cell;
-    } else {
-      settingCells.push(cell);
-    }
-  });
-
-  // Fallback when no UE marker: assume the last cell carries the content.
-  if (!contentRow && cells.length) {
-    contentRow = cells[cells.length - 1];
-    const idx = settingCells.indexOf(contentRow);
-    if (idx !== -1) settingCells.splice(idx, 1);
-  }
-
   let indent = 0;
   let nestedVariant = '';
   let nestedStyle = '';
   let startValue = '';
 
-  settingCells.forEach((cell) => {
-    const prop = cell.getAttribute('data-aue-prop');
-    const raw = cell.textContent.trim();
-    let matched = false;
-    if (prop === 'listItemIndent') {
+  // Universal Editor path: locate each field by its data-aue-prop, regardless
+  // of nesting depth inside the item element.
+  const indentEl = findFieldEl(itemEl, '[data-aue-prop="listItemIndent"]');
+  const variantEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedVariant"]');
+  const styleOrderedEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyleOrdered"]');
+  const styleUnorderedEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyleUnordered"]');
+  // Legacy single-field name from before the ordered/unordered split.
+  const styleLegacyEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyle"]');
+  const startEl = findFieldEl(itemEl, '[data-aue-prop="listItemStartValue"]');
+  const contentEl = findFieldEl(itemEl, '[data-aue-prop="listItemTextContent"]');
+
+  const ueDetected = !!(
+    indentEl || variantEl || styleOrderedEl || styleUnorderedEl
+    || styleLegacyEl || startEl || contentEl
+  );
+
+  if (ueDetected) {
+    if (indentEl) {
+      const raw = indentEl.textContent.trim();
       if (INDENT_TOKENS.has(raw)) indent = parseInt(raw, 10);
-      matched = true;
-    } else if (prop === 'listItemNestedVariant') {
+    }
+    if (variantEl) {
+      const raw = variantEl.textContent.trim();
       if (LIST_TYPES.has(raw)) nestedVariant = raw;
-      matched = true;
-    } else if (
-      prop === 'listItemNestedStyleOrdered'
-      || prop === 'listItemNestedStyleUnordered'
-      // Legacy single-field name from before the ordered/unordered split.
-      || prop === 'listItemNestedStyle'
-    ) {
+    }
+    // Prefer the variant-specific style cell; fall back to legacy, then to
+    // whichever style cell carries a recognised value.
+    [styleOrderedEl, styleUnorderedEl, styleLegacyEl].forEach((el) => {
+      if (!el || nestedStyle) return;
+      const raw = el.textContent.trim();
       if (ORDERED_STYLES.has(raw) || ICON_STYLES.has(raw)) nestedStyle = raw;
-      matched = true;
-    } else if (prop === 'listItemStartValue') {
-      startValue = raw;
-      matched = true;
+    });
+    if (startEl) startValue = startEl.textContent.trim();
+    if (contentEl) contentRow = contentEl;
+  } else {
+    // Legacy/preview HTML path: positional cells, no data-aue-prop. Each cell
+    // is wrapped in an extra div per the drafts shape.
+    const cells = [...itemEl.children].map(resolveCell);
+    if (cells.length) {
+      contentRow = cells[cells.length - 1];
+      const settings = cells.slice(0, -1);
+      settings.forEach((cell) => {
+        const raw = cell.textContent.trim();
+        if (!raw) return;
+        const token = raw.toLowerCase();
+        if (INDENT_TOKENS.has(token) && indent === 0) indent = parseInt(token, 10);
+        else if (LIST_TYPES.has(token)) nestedVariant = token;
+        else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) nestedStyle = token;
+        else if (!startValue) startValue = raw;
+      });
     }
-    // For unknown / missing data-aue-prop, fall back to token matching against
-    // the cell text so legacy property names and drafts/preview HTML still
-    // resolve to the correct setting.
-    if (!matched && raw) {
-      const token = raw.toLowerCase();
-      if (INDENT_TOKENS.has(token) && indent === 0) indent = parseInt(token, 10);
-      else if (LIST_TYPES.has(token)) nestedVariant = token;
-      else if (ORDERED_STYLES.has(token) || ICON_STYLES.has(token)) nestedStyle = token;
-      else if (!startValue) startValue = raw;
-    }
-  });
+  }
 
   return {
     indent, nestedVariant, nestedStyle, startValue, contentRow,
