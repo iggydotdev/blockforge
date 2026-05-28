@@ -34,14 +34,6 @@
   gap: var(--spacing-8, 8px);
 }
 
-/* A sub-list nested inside an icon <li> must drop to its own row instead of
-   sitting beside the icon/content as a third flex column. Indent it under the
-   text (icon width + flex gap) so the hierarchy stays visible. */
-.list-items ul.list-items-icons > li > .list-items-list {
-  flex-basis: 100%;
-  margin-left: calc(1.25em + var(--spacing-8, 8px));
-}
-
 .list-items ul.list-items-icons > li > .icon {
   flex-shrink: 0;
   width: 1.25em;
@@ -76,10 +68,17 @@
   list-style-type: lower-alpha;
 }
 
-/* Sibling lists produced by per-item start restarts share the parent's gap.
-   stylelint-disable-next-line no-descending-specificity */
+/* Sibling lists produced by per-item start restarts share the parent's gap. */
 .list-items .list-items-list + .list-items-list {
   margin-top: var(--spacing-8, 8px);
+}
+
+/* A sub-list nested inside an icon <li> must drop to its own row instead of
+   sitting beside the icon/content as a third flex column. Indent it under the
+   text (icon width + flex gap) so the hierarchy stays visible. */
+.list-items ul.list-items-icons > li > .list-items-list {
+  flex-basis: 100%;
+  margin-left: calc(1.25em + var(--spacing-8, 8px));
 }
 
 .list-items .list-item-content {
