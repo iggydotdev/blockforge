@@ -121,42 +121,70 @@ function parseContainerSettings(settingRows) {
 }
 
 /**
- * Read indent + nestedStyle settings from a list-item row. The content row is
- * identified by [data-aue-prop="listItemTextContent"]; other rows hold setting
- * tokens.
+ * Resolve the effective cell element for an item child. In Universal Editor
+ * rendering, the item's direct children ARE the field cells. In the legacy
+ * drafts test format, each field is wrapped in an extra <div>, so the cell is
+ * one level deeper. This shim handles both shapes.
+ * @param {Element} child
+ * @returns {Element}
+ */
+function resolveCell(child) {
+  // Legacy drafts shape: a wrapper <div> whose only child is the real cell
+  // and which carries no text content of its own.
+  if (
+    child.children.length === 1
+    && child.firstElementChild.tagName === 'DIV'
+    && !child.hasAttribute('data-aue-prop')
+    && !child.hasAttribute('data-aue-component')
+  ) {
+    const onlyText = [...child.childNodes]
+      .filter((n) => n.nodeType === Node.TEXT_NODE)
+      .map((n) => n.textContent.trim())
+      .join('');
+    if (!onlyText) return child.firstElementChild;
+  }
+  return child;
+}
+
+/**
+ * Read indent + nestedStyle settings from a list-item. Each item child is a
+ * field cell (UE) or a wrapper around a cell (legacy drafts). The content cell
+ * is identified by [data-aue-prop="listItemTextContent"] when present, with a
+ * positional fallback (last cell) for preview/drafts without UE attributes.
  * @param {Element} itemEl
  * @returns {{ indent: number, nestedStyle: string, contentRow: Element|null }}
  */
 function parseItem(itemEl) {
-  const rows = [...itemEl.children];
+  const cells = [...itemEl.children].map(resolveCell);
   let contentRow = null;
-  const settingRows = [];
+  const settingCells = [];
 
-  rows.forEach((row) => {
-    if (row.querySelector('[data-aue-prop="listItemTextContent"]')) {
-      contentRow = row;
+  cells.forEach((cell) => {
+    if (
+      cell.matches('[data-aue-prop="listItemTextContent"]')
+      || cell.querySelector('[data-aue-prop="listItemTextContent"]')
+    ) {
+      contentRow = cell;
     } else {
-      settingRows.push(row);
+      settingCells.push(cell);
     }
   });
 
   // Fallback: if no content marker was found (e.g. preview without UE
-  // attributes), assume the last row is the content row.
-  if (!contentRow && rows.length) {
-    contentRow = rows[rows.length - 1];
-    const idx = settingRows.indexOf(contentRow);
-    if (idx !== -1) settingRows.splice(idx, 1);
+  // attributes), assume the last cell is the content cell.
+  if (!contentRow && cells.length) {
+    contentRow = cells[cells.length - 1];
+    const idx = settingCells.indexOf(contentRow);
+    if (idx !== -1) settingCells.splice(idx, 1);
   }
 
   let indent = 0;
   let nestedStyle = '';
-  settingRows.forEach((row) => {
-    row.querySelectorAll(':scope > div').forEach((cell) => {
-      const token = cell.textContent.trim().toLowerCase();
-      if (!token) return;
-      if (INDENT_TOKENS.has(token)) indent = parseInt(token, 10);
-      else if (NESTED_STYLE_TOKENS.has(token)) nestedStyle = token;
-    });
+  settingCells.forEach((cell) => {
+    const token = cell.textContent.trim().toLowerCase();
+    if (!token) return;
+    if (INDENT_TOKENS.has(token)) indent = parseInt(token, 10);
+    else if (NESTED_STYLE_TOKENS.has(token)) nestedStyle = token;
   });
 
   return { indent, nestedStyle, contentRow };
