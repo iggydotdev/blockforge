@@ -12,6 +12,7 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+import decorateTooltips from './tooltip.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -147,6 +148,7 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  decorateTooltips(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

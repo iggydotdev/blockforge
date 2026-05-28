@@ -1,2 +1,62 @@
 /* add global styles that can be loaded post LCP here */
 @import url('/blocks/button/button.css');
+
+/* --- Tooltips ---------------------------------------------------------------
+   Inline tooltips authored as `<a href="#tooltip" title="...">term</a>` in
+   any rich-text field. Rewritten to `<span class="tooltip">` by
+   scripts/tooltip.js. Hover/focus reveal on desktop; tap toggles `.is-open`
+   on touch. */
+.tooltip {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dotted currentcolor;
+  cursor: help;
+  outline: none;
+}
+
+.tooltip:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  min-width: 12ch;
+  max-width: min(28ch, 90vw);
+  padding: 8px 10px;
+  background: #222;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease-out, visibility 120ms;
+  pointer-events: none;
+}
+
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #222;
+}
+
+.tooltip:hover .tooltip-content,
+.tooltip:focus .tooltip-content,
+.tooltip:focus-within .tooltip-content,
+.tooltip.is-open .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
