@@ -147,48 +147,51 @@ function findFieldEl(root, selector) {
  * @param {Element} itemEl
  */
 function parseItem(itemEl) {
-  // TEMP DEBUG — remove after diagnosis.
-  // eslint-disable-next-line no-console
-  console.log('[list-items DEBUG] itemEl.outerHTML:', itemEl.outerHTML);
-
   let contentRow = null;
   let indent = 0;
   let nestedVariant = '';
   let nestedStyle = '';
   let startValue = '';
 
-  // Universal Editor path: locate each field by its data-aue-prop, regardless
-  // of nesting depth inside the item element.
-  const indentEl = findFieldEl(itemEl, '[data-aue-prop="listItemIndent"]');
-  const variantEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedVariant"]');
-  const styleOrderedEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyleOrdered"]');
-  const styleUnorderedEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyleUnordered"]');
-  // Legacy single-field name from before the ordered/unordered split.
-  const styleLegacyEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyle"]');
+  // Universal Editor only marks `listItemStartValue` and `listItemTextContent`
+  // with `data-aue-prop`. The four select fields (indent, nestedVariant,
+  // nestedStyleOrdered, nestedStyleUnordered) are emitted as plain positional
+  // <div><p>value</p></div> cells with no marker. So in UE mode we read the
+  // selects by their fixed child index in the model field order.
   const startEl = findFieldEl(itemEl, '[data-aue-prop="listItemStartValue"]');
   const contentEl = findFieldEl(itemEl, '[data-aue-prop="listItemTextContent"]');
+  // Legacy single-field name from before the ordered/unordered split.
+  const styleLegacyEl = findFieldEl(itemEl, '[data-aue-prop="listItemNestedStyle"]');
 
-  const ueDetected = !!(
-    indentEl || variantEl || styleOrderedEl || styleUnorderedEl
-    || styleLegacyEl || startEl || contentEl
-  );
+  const ueDetected = !!(startEl || contentEl || styleLegacyEl);
 
   if (ueDetected) {
-    if (indentEl) {
-      const raw = indentEl.textContent.trim();
-      if (INDENT_TOKENS.has(raw)) indent = parseInt(raw, 10);
-    }
-    if (variantEl) {
-      const raw = variantEl.textContent.trim();
-      if (LIST_TYPES.has(raw)) nestedVariant = raw;
-    }
-    // Prefer the variant-specific style cell; fall back to legacy, then to
-    // whichever style cell carries a recognised value.
-    [styleOrderedEl, styleUnorderedEl, styleLegacyEl].forEach((el) => {
-      if (!el || nestedStyle) return;
-      const raw = el.textContent.trim();
+    const children = [...itemEl.children];
+    const readText = (idx) => (children[idx] ? children[idx].textContent.trim() : '');
+
+    const indentRaw = readText(0);
+    if (INDENT_TOKENS.has(indentRaw)) indent = parseInt(indentRaw, 10);
+
+    const variantRaw = readText(1);
+    if (LIST_TYPES.has(variantRaw)) nestedVariant = variantRaw;
+
+    // Pick the style cell matching the chosen variant; fall back to legacy
+    // single-field shape, then to whichever positional cell has a valid token.
+    const styleOrderedRaw = readText(2);
+    const styleUnorderedRaw = readText(3);
+    if (nestedVariant === 'ordered' && ORDERED_STYLES.has(styleOrderedRaw)) {
+      nestedStyle = styleOrderedRaw;
+    } else if (nestedVariant === 'unordered' && ICON_STYLES.has(styleUnorderedRaw)) {
+      nestedStyle = styleUnorderedRaw;
+    } else if (styleLegacyEl) {
+      const raw = styleLegacyEl.textContent.trim();
       if (ORDERED_STYLES.has(raw) || ICON_STYLES.has(raw)) nestedStyle = raw;
-    });
+    } else if (ORDERED_STYLES.has(styleOrderedRaw)) {
+      nestedStyle = styleOrderedRaw;
+    } else if (ICON_STYLES.has(styleUnorderedRaw)) {
+      nestedStyle = styleUnorderedRaw;
+    }
+
     if (startEl) startValue = startEl.textContent.trim();
     if (contentEl) contentRow = contentEl;
   } else {
