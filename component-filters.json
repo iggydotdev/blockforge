@@ -204,6 +204,12 @@
     ]
   },
   {
+    "id": "quick-links",
+    "components": [
+      "quick-link"
+    ]
+  },
+  {
     "id": "stats",
     "components": [
       "stat-item"

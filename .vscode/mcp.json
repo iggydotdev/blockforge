@@ -13,13 +13,9 @@
 			"type": "http"
 		},
 		
-		"playwright": { 
-      		"command": "/bin/zsh",
-			"args": [
-				"-i",
-				"-c",
-				"npx -y @playwright/mcp@latest"
-			],
+		"playwright": {
+			"command": "npx",
+			"args": ["-y", "@playwright/mcp@latest"],
 			"type": "stdio"
 		},
 		
@@ -29,12 +25,8 @@
     	},
 
 		"figma-console": {
-			"command": "/bin/zsh",
-			"args": [
-				"-i",
-				"-c",
-				"npx -y figma-console-mcp@latest"
-			],
+			"command": "npx",
+			"args": ["-y", "figma-console-mcp@latest"],
 			"type": "stdio",
 			"env": {
 				"FIGMA_ACCESS_TOKEN": "${input:figmaConsoleToken}",

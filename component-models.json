@@ -1253,6 +1253,88 @@
     ]
   },
   {
+    "id": "quick-link",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false,
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconAlt",
+        "label": "Icon alt text (leave blank if decorative — label conveys destination)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "display_iconPosition",
+        "label": "Icon Position",
+        "value": "top",
+        "options": [
+          {
+            "name": "Top",
+            "value": "top"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "display_label",
+        "label": "Label",
+        "required": true,
+        "validation": {
+          "minLength": 2,
+          "maxLength": 90
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "display_description",
+        "label": "Description",
+        "required": true,
+        "validation": {
+          "minLength": 5,
+          "maxLength": 125
+        }
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link_link",
+        "label": "Link",
+        "required": true
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link_linkTarget",
+        "label": "Link Target",
+        "value": "_blank",
+        "options": [
+          {
+            "name": "New tab (default)",
+            "value": "_blank"
+          },
+          {
+            "name": "Same window",
+            "value": "_self"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "quote",
     "fields": [
       {
