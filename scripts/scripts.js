@@ -165,18 +165,16 @@ function applyTemplateSectionFilters(main) {
   // Only apply when the Universal Editor is active
   const isUE = window.location.search.includes('aue_') || window.location.hostname.includes('adobeaemcloud.com');
   if (!isUE) return;
+  let targetFilterId = '';
+  if (document.body.classList.contains('pdp')) {
+    targetFilterId = 'section-pdp';
+  } else if (document.body.classList.contains('article-page')) {
+    targetFilterId = 'section-article';
+  } else {
+    targetFilterId = 'default';
+  }
+  
 
-  // Read the template meta tag value (converts to lowercase to avoid casing errors)
-  const currentTemplate = document.querySelector('meta[name="template"]')?.getAttribute('content')?.toLowerCase() || 'default';
-
-  // Map template strings directly to your JSON filter IDs
-  const templateFilterMap = {
-    'pdp': 'section-pdp',
-    'default': 'section'
-  };
-
-  // Determine the correct filter based on map lookup or fallback to default
-  const targetFilterId = templateFilterMap[currentTemplate] || templateFilterMap['default'];
 
   // Target every top-level section container injected by EDS
   const sections = main.querySelectorAll(':scope > .section');
