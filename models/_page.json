@@ -21,6 +21,22 @@
           "name": "keywords",
           "multi": true,
           "label": "Keywords"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "template-type",
+          "label": "Template Type",
+          "options": [
+            {
+              "name": "Home",
+              "value": "home"
+            },
+            {
+              "name": "PDP",
+              "value": "pdp"
+            }
+          ]
         }
       ]
     }
