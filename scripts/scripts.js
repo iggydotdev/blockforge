@@ -111,6 +111,31 @@ export function decorateMain(main) {
   a11yLinks(main);
 }
 
+function applyTemplateSectionFilters(main) {
+  // Only apply when the Universal Editor is active
+  const isUE = window.location.search.includes('aue_') || window.location.hostname.includes('adobeaemcloud.com');
+  if (!isUE) return;
+  let targetFilterId = '';
+  if (document.body.classList.contains('pdp')) {
+    targetFilterId = 'section-pdp';
+  } else if (document.body.classList.contains('article-page')) {
+    targetFilterId = 'section-article';
+  } else {
+    targetFilterId = 'default';
+  }
+
+  // Target every top-level section container injected by EDS
+  const sections = main.querySelectorAll(':scope > .section');
+
+  sections.forEach((section) => {
+    // Tell Universal Editor this section is an authorable structural container
+    section.setAttribute('data-aue-type', 'container');
+
+    // Inject the dynamically mapped template filter
+    section.setAttribute('data-aue-filter', targetFilterId);
+  });
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -146,7 +171,6 @@ async function loadEager(doc) {
 async function loadLazy(doc) {
   autolinkModals(doc);
   loadHeader(doc.querySelector('header'));
-
   const main = doc.querySelector('main');
   await loadSections(main);
   decorateTooltips(main);
@@ -159,33 +183,6 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
-}
-
-function applyTemplateSectionFilters(main) {
-  // Only apply when the Universal Editor is active
-  const isUE = window.location.search.includes('aue_') || window.location.hostname.includes('adobeaemcloud.com');
-  if (!isUE) return;
-  let targetFilterId = '';
-  if (document.body.classList.contains('pdp')) {
-    targetFilterId = 'section-pdp';
-  } else if (document.body.classList.contains('article-page')) {
-    targetFilterId = 'section-article';
-  } else {
-    targetFilterId = 'default';
-  }
-  
-
-
-  // Target every top-level section container injected by EDS
-  const sections = main.querySelectorAll(':scope > .section');
-
-  sections.forEach((section) => {
-    // Tell Universal Editor this section is an authorable structural container
-    section.setAttribute('data-aue-type', 'container');
-    
-    // Inject the dynamically mapped template filter
-    section.setAttribute('data-aue-filter', targetFilterId);
-  });
 }
 
 export async function inlineSVGs(container) {
