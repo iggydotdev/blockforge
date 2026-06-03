@@ -56,12 +56,12 @@
               "page": {
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
-                  "model": "section"
+                  "model": "section",
+                  "filter": "context.pageProperties.template"
                 }
               }
             }
-          },
-          "filter": "context.pageProperties.template"
+          }
         }
       ]
     },
