@@ -1,101 +1,107 @@
-{
-  "definitions": [
-    {
-      "title": "Section",
-      "id": "section",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/section/v1/section",
-            "template": {
-              "model": "section"
+  {
+    "definitions": [
+      {
+        "title": "Section",
+        "id": "section",
+        "plugins": {
+          "xwalk": {
+            "page": {
+              "resourceType": "core/franklin/components/section/v1/section",
+              "template": {
+                "model": "section"
+              }
             }
           }
         }
       }
-    }
-  ],
-  "models": [
-    {
-      "id": "section",
-      "fields": [
-        {
-          "component": "text",
-          "name": "name",
-          "label": "Section Name",
-          "description": "The label shown for this section in the Content Tree"
-        },
-        {
-          "component": "multiselect",
-          "name": "style",
-          "label": "Style",
-          "options": [
-            {
-              "name": "Highlight",
-              "value": "highlight"
-            },
-            {
-              "name": "Card Collection",
-              "value": "card-collection"
-            },
-            {
-              "name": "Articles Layout (title + button + articles)",
-              "value": "articles-layout"
-            },
-            {
-              "name": "Section Header Row (title + button)",
-              "value": "section-header-row"
-            },
-            {
-              "name": "Stats Layout (title + stats)",
-              "value": "stats-layout"
-            },
-            {
-              "name": "Benefits Layout (deprecated, use Section Header Row)",
-              "value": "benefits-layout"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "filters": [
-    {
-      "id": "section",
-      "components": [
-        "accordion",
-        "accordions",
-        "articles",
-        "banner",
-        "benefits",
-        "button",
-        "carousel",
-        "cards",
-        "columns",
-        "content-block",
-        "divider",
-        "embed",
-        "fcards",
-        "form",
-        "fragment",
-        "gallery",
-        "hero",
-        "hero-carousel",
-        "html",
-        "icard",
-        "image",
-        "list-items",
-        "product-cards",
-        "promo-banner",
-        "quote",
-        "search",
-        "stats",
-        "table",
-        "tabs",
-        "text",
-        "title",
-        "video"
-      ]
-    }
-  ]
-}
+    ],
+    "models": [
+      {
+        "id": "section",
+        "fields": [
+          {
+            "component": "text",
+            "name": "name",
+            "label": "Section Name",
+            "description": "The label shown for this section in the Content Tree"
+          },
+          {
+            "component": "multiselect",
+            "name": "style",
+            "label": "Style",
+            "options": [
+              {
+                "name": "Highlight",
+                "value": "highlight"
+              },
+              {
+                "name": "Card Collection",
+                "value": "card-collection"
+              },
+              {
+                "name": "Articles Layout (title + button + articles)",
+                "value": "articles-layout"
+              },
+              {
+                "name": "Section Header Row (title + button)",
+                "value": "section-header-row"
+              },
+              {
+                "name": "Stats Layout (title + stats)",
+                "value": "stats-layout"
+              },
+              {
+                "name": "Benefits Layout (deprecated, use Section Header Row)",
+                "value": "benefits-layout"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "id": "section",
+        "components": [
+          "accordion",
+          "accordions",
+          "articles",
+          "banner",
+          "benefits",
+          "button",
+          "carousel",
+          "cards",
+          "columns",
+          "content-block",
+          "divider",
+          "embed",
+          "fcards",
+          "form",
+          "fragment",
+          "gallery",
+          "hero",
+          "hero-carousel",
+          "html",
+          "icard",
+          "image",
+          "list-items",
+          "product-cards",
+          "promo-banner",
+          "quote",
+          "search",
+          "stats",
+          "table",
+          "tabs",
+          "text",
+          "title",
+          "video"
+        ]
+      },
+      {
+        "id": "section-pdp",
+        "components": [
+          "text"
+        ]
+      }
+    ]
+  }

@@ -43,6 +43,12 @@
     ]
   },
   {
+    "id": "section-pdp",
+    "components": [
+      "text"
+    ]
+  },
+  {
     "id": "richtext",
     "rte": {
       "toolbar": {
