@@ -24,12 +24,12 @@
       {
         "component": "select",
         "valueType": "string",
-        "name": "template-type",
+        "name": "template",
         "label": "Template Type",
         "options": [
           {
             "name": "Home",
-            "value": "home"
+            "value": "default"
           },
           {
             "name": "PDP",
