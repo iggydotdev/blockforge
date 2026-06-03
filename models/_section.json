@@ -9,10 +9,13 @@
               "resourceType": "core/franklin/components/section/v1/section",
               "template": {
                 "model": "section"
+               
               }
             }
           }
-        }
+        },
+        "filter": "context.pageProperties.template"
+
       }
     ],
     "models": [
