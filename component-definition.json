@@ -65,7 +65,7 @@
         },
         {
           "title": "Section (PDP)",
-          "id": "pdp",
+          "id": "section-pdp",
           "plugins": {
             "xwalk": {
               "page": {
