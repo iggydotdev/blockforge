@@ -17,7 +17,7 @@
       },
       {
         "title": "Section (PDP)",
-        "id": "section-pdp",
+        "id": "pdp",
         "plugins": {
           "xwalk": {
             "page": {
@@ -25,7 +25,7 @@
               "template": {
                 "name": "Section",
                 "model": "section",
-                "filter": "section-pdp"  
+                "filter": "pdp"  
               }
             }
           }
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "id": "section-pdp",
+        "id": "pdp",
         "components": [
           "text"
         ]
