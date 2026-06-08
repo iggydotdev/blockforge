@@ -121,7 +121,7 @@ function applyTemplateSectionFilters(main) {
   } else if (document.body.classList.contains('article-page')) {
     targetFilterId = 'section-article';
   } else {
-    targetFilterId = 'default';
+    targetFilterId = 'section';
   }
 
   // Target every top-level section container injected by EDS

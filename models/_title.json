@@ -52,6 +52,63 @@
             {
               "name": "h6",
               "value": "h6"
+            },
+            {
+              "name": "Display 1",
+              "value": "display1"
+            },
+            {
+              "name": "Display 2",
+              "value": "display2"
+            }
+          ]
+        },
+        {"component": "select",
+          "name": "titleAlignment",
+          "label": "Title Alignment",
+          "options": [
+            {
+              "name": "left",
+              "value": "Left"
+            },
+            {
+              "name": "Center",
+              "value": "center"
+            },
+            {
+              "name": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "titleOverride",
+          "label": "Title Override",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            },
+            {
+              "name": "h2",
+              "value": "h2"
+            },
+            {
+              "name": "h3",
+              "value": "h3"
+            },
+            {
+              "name": "h4",
+              "value": "h4"
+            },
+            {
+              "name": "h5",
+              "value": "h5"
+            },
+            {
+              "name": "h6",
+              "value": "h6"
             }
           ]
         }
