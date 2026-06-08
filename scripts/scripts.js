@@ -96,6 +96,26 @@ function a11yLinks(main) {
   });
 }
 
+function applyTemplateSectionFilters(main) {
+  // 1. Get the template name entered by the author (e.g., 'pdp', 'blog', 'homepage')
+  const templateId = getMetadata('template')?.toLowerCase().trim();
+
+  // 2. Define your list of known/supported templates
+  const supportedTemplates = ['pdp'];
+
+  // 3. Determine the correct filter ID
+  let filterId = 'section'; // Default fallback
+  if (templateId && supportedTemplates.includes(templateId)) {
+    filterId = `section-${templateId}`;
+  }
+
+  // 4. Apply the filter ID to all authorable sections
+  const sections = main.querySelectorAll('.section');
+  sections.forEach((section) => {
+    section.setAttribute('data-aue-filter', filterId);
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -103,37 +123,13 @@ function a11yLinks(main) {
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
+  applyTemplateSectionFilters(main);
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
   a11yLinks(main);
-}
-
-function applyTemplateSectionFilters(main) {
-  // Only apply when the Universal Editor is active
-  const isUE = window.location.search.includes('aue_') || window.location.hostname.includes('adobeaemcloud.com');
-  if (!isUE) return;
-  let targetFilterId = '';
-  if (document.body.classList.contains('pdp')) {
-    targetFilterId = 'section-pdp';
-  } else if (document.body.classList.contains('article-page')) {
-    targetFilterId = 'section-article';
-  } else {
-    targetFilterId = 'default';
-  }
-
-  // Target every top-level section container injected by EDS
-  const sections = main.querySelectorAll(':scope > .section');
-
-  sections.forEach((section) => {
-    // Tell Universal Editor this section is an authorable structural container
-    section.setAttribute('data-aue-type', 'container');
-
-    // Inject the dynamically mapped template filter
-    section.setAttribute('data-aue-filter', targetFilterId);
-  });
 }
 
 /**
@@ -149,7 +145,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    applyTemplateSectionFilters(main);
+    // applyTemplateSectionFilters(main);
     doc.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }

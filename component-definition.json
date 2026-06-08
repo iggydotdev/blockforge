@@ -57,7 +57,23 @@
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
                   "model": "section",
-                  "filter": "context.pageProperties.template"
+                  "filter": "section"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Section (PDP)",
+          "id": "section-pdp",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "name": "Section",
+                  "model": "section",
+                  "filter": "section-pdp"
                 }
               }
             }

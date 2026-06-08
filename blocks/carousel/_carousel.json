@@ -55,6 +55,26 @@
           "name": "text",
           "label": "Content",
           "value": ""
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "slidestyle",
+          "label": "Slide Style",
+          "options": [
+            {
+              "name": "Default",
+              "value": "default"
+            },
+            {
+              "name": "Text on left",
+              "value": "text-left"
+            },
+            {
+              "name": "Text on right",
+              "value": "text-right"
+            }
+          ] 
         }
       ]
     }

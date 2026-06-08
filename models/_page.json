@@ -30,11 +30,11 @@
           "options": [
             {
               "name": "Home",
-              "value": "default"
+              "value": "section"
             },
             {
               "name": "PDP",
-              "value": "pdp"
+              "value": "section-pdp"
             }
           ]
         }
