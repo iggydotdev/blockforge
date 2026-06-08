@@ -111,30 +111,31 @@ export function decorateMain(main) {
   a11yLinks(main);
 }
 
-function applyTemplateSectionFilters(main) {
-  // Only apply when the Universal Editor is active
-  const isUE = window.location.search.includes('aue_') || window.location.hostname.includes('adobeaemcloud.com');
-  if (!isUE) return;
-  let targetFilterId = '';
-  if (document.body.classList.contains('pdp')) {
-    targetFilterId = 'section-pdp';
-  } else if (document.body.classList.contains('article-page')) {
-    targetFilterId = 'section-article';
-  } else {
-    targetFilterId = 'section';
-  }
+// function applyTemplateSectionFilters(main) {
+//   // Only apply when the Universal Editor is active
+//   const isUE = window.location.search.includes('aue_') ||
+//    window.location.hostname.includes('adobeaemcloud.com');
+//   if (!isUE) return;
+//   let targetFilterId = '';
+//   if (document.body.classList.contains('pdp')) {
+//     targetFilterId = 'section-pdp';
+//   } else if (document.body.classList.contains('article-page')) {
+//     targetFilterId = 'section-article';
+//   } else {
+//     targetFilterId = 'section';
+//   }
 
-  // Target every top-level section container injected by EDS
-  const sections = main.querySelectorAll(':scope > .section');
+//   // Target every top-level section container injected by EDS
+//   const sections = main.querySelectorAll(':scope > .section');
 
-  sections.forEach((section) => {
-    // Tell Universal Editor this section is an authorable structural container
-    section.setAttribute('data-aue-type', 'container');
+//   sections.forEach((section) => {
+//     // Tell Universal Editor this section is an authorable structural container
+//     section.setAttribute('data-aue-type', 'container');
 
-    // Inject the dynamically mapped template filter
-    section.setAttribute('data-aue-filter', targetFilterId);
-  });
-}
+//     // Inject the dynamically mapped template filter
+//     section.setAttribute('data-aue-filter', targetFilterId);
+//   });
+// }
 
 /**
  * Loads everything needed to get to LCP.
@@ -149,7 +150,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    applyTemplateSectionFilters(main);
+    // applyTemplateSectionFilters(main);
     doc.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
