@@ -25,7 +25,7 @@
               "template": {
                 "name": "Section",
                 "model": "section",
-                "filter": "pdp"  
+                "filter": "section-pdp"  
               }
             }
           }
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "id": "pdp",
+        "id": "section-pdp",
         "components": [
           "text"
         ]

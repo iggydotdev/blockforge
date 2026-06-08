@@ -2,7 +2,7 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "context.pageProperties.template"
     ]
   },
   {

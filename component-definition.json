@@ -73,7 +73,7 @@
                 "template": {
                   "name": "Section",
                   "model": "section",
-                  "filter": "pdp"
+                  "filter": "section-pdp"
                 }
               }
             }
